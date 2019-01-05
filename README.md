@@ -13,7 +13,7 @@ AutoClick (Pascal Script Compiler)
   https://www.lazarus-ide.org/
   
 ## Description
-If you know Pascal programming language, with AutoClick you can set automatic clicks on your Windows computer. Special functions for mouse and screen controling are added in this project. And a generator code is added to help coding Pascal Scripts. 
+If you know Pascal programming language, with AutoClick you can set automatic clicks on your Windows computer. Special functions for mouse and screen controling are added in this project. And a generator code is aviable to help coding Pascal Scripts. 
 
 ## Librairy added in Unit1.pas 
 ```
