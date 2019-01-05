@@ -690,7 +690,7 @@ object Form1: TForm1
             Text = 'LabeledEdit1'
           end
           object ButtonCodeCopy: TButton
-            Left = 463
+            Left = 456
             Height = 25
             Top = 16
             Width = 75
