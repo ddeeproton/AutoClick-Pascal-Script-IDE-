@@ -786,6 +786,10 @@ object Form1: TForm1
   object PopupMenuShellView: TPopupMenu
     left = 48
     top = 56
+    object MenuItemRunAndSave: TMenuItem
+      Caption = 'Save and Run'
+      OnClick = ButtonRunClick
+    end
     object MenuItemSave: TMenuItem
       Caption = 'Save'
       OnClick = MenuItemSaveClick
@@ -793,10 +797,6 @@ object Form1: TForm1
     object MenuItemSaveAs: TMenuItem
       Caption = 'Save as ...'
       OnClick = MenuItemSaveAsClick
-    end
-    object MenuItemRunAndSave: TMenuItem
-      Caption = 'Save and Run'
-      OnClick = ButtonRunClick
     end
     object MenuItem3: TMenuItem
       Caption = '-'
