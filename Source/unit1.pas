@@ -32,6 +32,9 @@ type
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
     MenuItem2: TMenuItem;
@@ -84,6 +87,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure MenuItem10Click(Sender: TObject);
     procedure MenuItem15Click(Sender: TObject);
+    procedure MenuItem17Click(Sender: TObject);
+    procedure MenuItem18Click(Sender: TObject);
     procedure MenuItemClearCacheClick(Sender: TObject);
     procedure MenuItemCopyClipClick(Sender: TObject);
     procedure MenuItemCreateDirClick(Sender: TObject);
@@ -203,6 +208,19 @@ procedure TForm1.MenuItem15Click(Sender: TObject);
 begin
   MenuItemStopClick(nil);
   Application.Terminate;;
+end;
+
+
+procedure TForm1.MenuItem17Click(Sender: TObject);
+begin
+  Hide;
+end;
+
+
+procedure TForm1.MenuItem18Click(Sender: TObject);
+begin
+  Show;
+  BringToFront;
 end;
 
 
