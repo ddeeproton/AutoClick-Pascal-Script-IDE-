@@ -1,5 +1,4 @@
-# Pascal-Script-IDE
-AutoClick (Pascal Script Compiler)
+# AutoClick (Pascal Script Compiler)
 
 ![](Images/main.jpg)
 
