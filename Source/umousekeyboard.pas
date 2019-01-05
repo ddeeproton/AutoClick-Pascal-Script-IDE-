@@ -100,56 +100,39 @@ end;
 
 class procedure Actions.waitColorHexPositionPix(x,y: Integer; hex:String);
 begin
-  {
-  //EditA1.Text:= IntToStr(x+'='+);
-  Form1.EditA2.Text:= hex;
-  Form1.EditA3.Text := Actions.getColorHexPositionPix(x,y);
-  Application.ProcessMessages;
-  Sleep(10000);
-  }
-
-  // Tant qu'on a une troupe en train d'attaquer, on sleep
   while Actions.getColorHexPositionPix(x,y) = hex do
   begin
     Sleep(1000);
   end;
   Sleep(1000);
-  // Tant qu'on a une troupe en train d'attaquer, on sleep
   while Actions.getColorHexPositionPix(x,y) = hex do
   begin
     Sleep(1000);
   end;
-
 end;
 
 class procedure Actions.waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
 var i: Integer;
 begin
   i := 0;
-
-
-    // Tant qu'on a une troupe en train d'attaquer, on sleep
-    while (Actions.getColorHexPositionPix(x,y) = hex)
-    or (Actions.getColorHexPositionPix(x2,y2) = hex2) and (i < 10)  do
-    begin
-      Sleep(1000);
-    inc(i);
-    end;
+  while (Actions.getColorHexPositionPix(x,y) = hex)
+  or (Actions.getColorHexPositionPix(x2,y2) = hex2) and (i < 10)  do
+  begin
     Sleep(1000);
-    // Tant qu'on a une troupe en train d'attaquer, on sleep
-    while (Actions.getColorHexPositionPix(x,y) = hex)
-    or (Actions.getColorHexPositionPix(x2,y2) = hex2) and (i < 10)  do
-    begin
-      Sleep(1000);
-    end;
-
+  inc(i);
+  end;
+  Sleep(1000);
+  while (Actions.getColorHexPositionPix(x,y) = hex)
+  or (Actions.getColorHexPositionPix(x2,y2) = hex2) and (i < 10)  do
+  begin
+    Sleep(1000);
+  end;
 end;
 
 class procedure Actions.waitNotColorHexPositionPix(x,y: Integer; hex:String);
-var i: Integer;
+//var i: Integer;
 begin
-  i := 0;
-  // Tant qu'on a une troupe en train d'attaquer, on sleep
+  //i := 0;
   //while (Actions.getColorHexPositionPix(x,y) <> hex) and (i < 100)  do
   while (Actions.getColorHexPositionPix(x,y) <> hex) do
   begin
@@ -159,7 +142,6 @@ begin
 
   Sleep(100);
   {
-  // Tant qu'on a une troupe en train d'attaquer, on sleep
   while (Actions.getColorHexPositionPix(x,y) <> hex) and (i < 10)  do
   begin
     Sleep(1000);
@@ -170,22 +152,17 @@ end;
 
 class procedure Actions.waitNotColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
 begin
-
-
-    // Tant qu'on a une troupe en train d'attaquer, on sleep
-    while (Actions.getColorHexPositionPix(x,y) <> hex)
-    or (Actions.getColorHexPositionPix(x2,y2) <> hex2) do
-    begin
-      Sleep(1000);
-    end;
-    //Sleep(1000);
-    // Tant qu'on a une troupe en train d'attaquer, on sleep
-    while (Actions.getColorHexPositionPix(x,y) <> hex)
-    or (Actions.getColorHexPositionPix(x2,y2) <> hex2) do
-    begin
-      Sleep(1000);
-    end;
-
+  while (Actions.getColorHexPositionPix(x,y) <> hex)
+  or (Actions.getColorHexPositionPix(x2,y2) <> hex2) do
+  begin
+    Sleep(1000);
+  end;
+  //Sleep(1000);
+  while (Actions.getColorHexPositionPix(x,y) <> hex)
+  or (Actions.getColorHexPositionPix(x2,y2) <> hex2) do
+  begin
+    Sleep(1000);
+  end;
 end;
 
 class function Actions.IsShiftlKeyPressed(): Boolean;

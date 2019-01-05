@@ -1,0 +1,15 @@
+//var i: Integer;
+begin
+//RunScript('test.pss'); 
+//RunScriptAndContinue('test.pss'); 
+//SetNextScript('test.pss'); 
+//Log('test.pss'); 
+//Log2.Add('test');
+//t := Actions_getPositionPix(1,1);
+//p := t.position;
+//Log(getColorHexPositionPix(1,1));
+//MouseClick(1,1)
+ Log('yo');
+ DoSleep(1000);
+ Log(getColorHexPositionPix(1099, 370));
+ //RunScript('test.pss');
