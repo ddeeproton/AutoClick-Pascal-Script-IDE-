@@ -35,6 +35,7 @@ type
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
+    MenuItemDisableLog: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
     MenuItem2: TMenuItem;
@@ -95,6 +96,7 @@ type
     procedure MenuItemCutClipClick(Sender: TObject);
     procedure MenuItemDeleteClick(Sender: TObject);
     procedure MenuItemDeleteDirOrFileClick(Sender: TObject);
+    procedure MenuItemDisableLogClick(Sender: TObject);
     procedure MenuItemFunctionGeneratorClick(Sender: TObject);
     procedure MenuItemNewFileClick(Sender: TObject);
     procedure MenuItemPasteClick(Sender: TObject);
@@ -110,6 +112,7 @@ type
     procedure SynEdit1Change(Sender: TObject);
     procedure SynEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure TimerRecordTimer(Sender: TObject);
+    procedure AddLog(s: String);
   private
 
   public
@@ -152,6 +155,12 @@ implementation
 {$R *.lfm}
 
 { TForm1 }
+
+procedure TForm1.AddLog(s: String);
+begin
+  if MenuItemDisableLog.Checked then Exit;
+  Memo2.Lines.Add(s);
+end;
 
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -230,7 +239,7 @@ begin
   for i := 0 to Length(Cache) - 1 do
   begin
     Cache[i].Data.Free;
-    Memo2.Lines.Add('[Cache cleared] ' + Cache[i].Name.Replace(dataPath, ''));
+    AddLog('[Cache cleared] ' + Cache[i].Name.Replace(dataPath, ''));
   end;
   SetLength(Cache, 0);
 end;
@@ -324,6 +333,11 @@ begin
 
   ShellTreeView1.Root := currentPath;
   ShellTreeView1.Root := dataPath;
+end;
+
+procedure TForm1.MenuItemDisableLogClick(Sender: TObject);
+begin
+  MenuItemDisableLog.Checked := not MenuItemDisableLog.Checked;
 end;
 
 
@@ -449,7 +463,7 @@ begin
   or not FileExists(ShellTreeView1.Path) then Exit;
   SynEdit1.Lines.SaveToFile(ShellTreeView1.Path);
   Form1.Caption:= ShellTreeView1.Path;
-  Memo2.Lines.Add('[File saved] ' + ShellTreeView1.Path.Replace(dataPath, ''));
+  AddLog('[File saved] ' + ShellTreeView1.Path.Replace(dataPath, ''));
   for i := 0 to Length(Cache) - 1 do
   begin
     if Cache[i].Name = ShellTreeView1.Path then
@@ -457,7 +471,7 @@ begin
       Cache[i].Data.Free;
       Cache[i].Data := TStringList.Create;
       Cache[i].Data.LoadFromFile(ShellTreeView1.Path);
-      Memo2.Lines.Add('[Cache cleared] ' + ShellTreeView1.Path.Replace(dataPath, ''));
+      AddLog('[Cache cleared] ' + ShellTreeView1.Path.Replace(dataPath, ''));
     end;
   end;
 end;
@@ -469,7 +483,7 @@ var
 begin
   if Length(ProcessScripts) = 0 then
   begin                    
-      Memo2.Lines.Add('[Stop] No process to stop');
+      AddLog('[Stop] No process to stop');
   end;
   for i := 0 to Length(ProcessScripts) - 1 do
   begin
@@ -481,7 +495,7 @@ begin
         Application.ProcessMessages;
         Sleep(10);
       end;
-      Memo2.Lines.Add('[Stop] '+ProcessScripts[i].Name.Replace(dataPath, ''));
+      AddLog('[Stop] '+ProcessScripts[i].Name.Replace(dataPath, ''));
       //ProcessScripts[i].Data.Free;
       ProcessScripts[i].enabled := False;
     end;
@@ -596,23 +610,23 @@ begin
     end;
 
     if CacheLoaded then
-      Memo2.Lines.Add('[Cache loaded] '+f.Replace(dataPath, ''))
+      AddLog('[Cache loaded] '+f.Replace(dataPath, ''))
     else
-      Memo2.Lines.Add('[File loaded] '+f.Replace(dataPath, ''));
+      AddLog('[File loaded] '+f.Replace(dataPath, ''));
 
     Script.Script.Insert(0, 'program script;' + #13#10);
     Script.Script.Add(#13#10 + 'end.');
     Compiled := Script.Compile();
     for i := 0 to Script.CompilerMessageCount - 1 do
-      Memo2.Lines.add(Script.CompilerMessages[i].MessageToString);
+      AddLog(Script.CompilerMessages[i].MessageToString);
     if not Compiled then
       if Script.CompilerMessageCount > 0 then
         for i := 0 to Script.CompilerMessageCount - 1 do
-          Memo2.Lines.add(Script.CompilerErrorToStr(i));
+          AddLog(Script.CompilerErrorToStr(i));
 
-    Memo2.Lines.add('[Start run] '+f.Replace(dataPath, ''));
+    AddLog('[Start run] '+f.Replace(dataPath, ''));
     Script.Exec.RunScript;
-    Memo2.Lines.add('[End run] '+f.Replace(dataPath, ''));
+    AddLog('[End run] '+f.Replace(dataPath, ''));
 
     // Disable the handle of the process
     if Length(ProcessScripts) > index then
@@ -654,7 +668,7 @@ begin
   if (ShellTreeView1.Path = '')
   or not FileExists(ShellTreeView1.Path) then
   begin
-    Memo2.Lines.Add('[Run] No file selected');
+    AddLog('[Run] No file selected');
     Exit;
   end;
   MenuItemSaveClick(nil);

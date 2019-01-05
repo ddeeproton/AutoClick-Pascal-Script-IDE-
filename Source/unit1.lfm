@@ -774,6 +774,10 @@ object Form1: TForm1
         Caption = 'Function Generator'
         OnClick = MenuItemFunctionGeneratorClick
       end
+      object MenuItemDisableLog: TMenuItem
+        Caption = 'Disable log'
+        OnClick = MenuItemDisableLogClick
+      end
     end
   end
   object SynPasSyn1: TSynPasSyn
