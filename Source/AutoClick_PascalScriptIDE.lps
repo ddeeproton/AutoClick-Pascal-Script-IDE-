@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="798"/>
-        <CursorPos X="50" Y="818"/>
+        <TopLine Value="883"/>
+        <CursorPos X="43" Y="894"/>
         <UsageCount Value="153"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -40,13 +40,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="13496"/>
         <CursorPos Y="13517"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="45"/>
       </Unit3>
       <Unit4>
         <Filename Value="script2.pss"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="15"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit4>
       <Unit5>
@@ -54,7 +54,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="668"/>
         <CursorPos Y="691"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="19"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\lcl\shellctrls.pas"/>
@@ -62,24 +62,25 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1128"/>
         <CursorPos Y="1150"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSUtils.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="14"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="34"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\rtl\win\wininc\func.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="11" Y="163"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="25"/>
       </Unit8>
       <Unit9>
         <Filename Value="uprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
+        <TopLine Value="25"/>
         <CursorPos Y="11"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>

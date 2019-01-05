@@ -891,6 +891,8 @@ begin
   if index = 4 then LabeledEdit1.Text := 'waitNotColorHexPositionPix('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''');';
   if index = 5 then LabeledEdit1.Text := 'waitNotColorHexPositionPix2('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''', '+IntToStr(P4_value)+', '+IntToStr(P5_value)+', '''+P6_value+''');';
   if index = 6 then LabeledEdit1.Text := 'play('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''', '+IntToStr(P4_value)+', '+IntToStr(P5_value)+', '''+P6_value+''', '+IntToStr(P7_value)+', '+IntToStr(P8_value)+'); ';
+  if index = 7 then LabeledEdit1.Text := 'ExecAndContinue(''application.exe'', ''-parameters'');';
+  if index = 8 then LabeledEdit1.Text := 'KillTask(''application.exe'');';
 
   if Sender <> nil then TTimer(Sender).Enabled:=True;
 
@@ -907,14 +909,16 @@ begin
       if index = 4 then Label5.Caption:='Move your mouse and press F1';
       if index = 5 then Label5.Caption:='Move your mouse and press F1 or F2';
       if index = 6 then Label5.Caption:='Move your mouse and press F1 or F2 or F3';
+      if (index = 7) and (index = 8) then Label5.Caption:='Copy the code';
     end;
   end
   else begin
     if ComboBoxCode.ItemIndex = -1 then
     begin
-      Label5.Caption:='Select a function and press button listen';
+      Label5.Caption:='Select a function';
     end else begin
-      Label5.Caption:='Press button listen';
+      if index <= 6 then Label5.Caption:='Press button listen';
+      if (index = 7) and (index = 8) then Label5.Caption:='Copy the code';
     end;
   end;
 end;
