@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 97
+  Left = 259
   Height = 525
-  Top = 119
+  Top = 52
   Width = 817
   Caption = 'Pascal Script IDE v1.0'
   ClientHeight = 505
@@ -794,10 +794,12 @@ object Form1: TForm1
     top = 56
     object MenuItemRunAndSave: TMenuItem
       Caption = 'Save and Run'
+      ShortCut = 16452
       OnClick = ButtonRunClick
     end
     object MenuItemSave: TMenuItem
       Caption = 'Save'
+      ShortCut = 16467
       OnClick = MenuItemSaveClick
     end
     object MenuItemSaveAs: TMenuItem
@@ -827,6 +829,7 @@ object Form1: TForm1
     end
     object MenuItem6: TMenuItem
       Caption = 'Stop'
+      ShortCut = 16454
       OnClick = MenuItemStopClick
     end
     object MenuItem7: TMenuItem
