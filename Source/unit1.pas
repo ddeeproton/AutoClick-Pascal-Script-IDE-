@@ -246,10 +246,9 @@ procedure TForm1.MenuItemCreateDirClick(Sender: TObject);
 var
   dir, cdir: string;
 begin
-
-  if FileExists(ShellTreeView1.Path) then
+  if DirectoryExists(ShellTreeView1.Path) then
   begin
-    cdir := ExtractFileDir(ShellTreeView1.Path)+'\';
+    cdir := ShellTreeView1.Path;
   end else begin
     cdir := dataPath+'\';
   end;
