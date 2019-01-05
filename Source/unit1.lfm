@@ -762,10 +762,12 @@ object Form1: TForm1
     end
     object MenuItem1: TMenuItem
       Caption = 'Run'
+      ShortCut = 16452
       OnClick = ButtonRunClick
     end
     object MenuItemStop: TMenuItem
       Caption = 'Stop'
+      ShortCut = 16454
       OnClick = MenuItemStopClick
     end
     object MenuItem1Options: TMenuItem
