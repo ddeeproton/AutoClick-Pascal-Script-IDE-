@@ -32,6 +32,10 @@ begin
   Sender.AddMethod(Actions, @Actions.waitNotColorHexPositionPix, 'procedure waitNotColorHexPositionPix(x,y: Integer; hex:String);');
   Sender.AddMethod(Actions, @Actions.waitNotColorHexPositionPix2, 'procedure waitNotColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);');
   Sender.AddMethod(Actions, @Actions.IsShiftlKeyPressed, 'function IsShiftlKeyPressed(): Boolean; ');
-  Sender.AddMethod(Game, @Game.play, 'function play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean;'); 
+  Sender.AddMethod(Game, @Game.play, 'function play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean');
+  Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string; wShowWin: Word)');
+  Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string)');
+  Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
+  Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');  
 end;
 
