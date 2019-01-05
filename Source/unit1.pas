@@ -831,6 +831,10 @@ begin
   begin
     ButtonRunClick(nil);
   end;
+  if (Shift = [ssCtrl]) and (Upcase(Char(Key)) = 'F') then
+  begin
+    MenuItemStopClick(nil);
+  end;
 end;
 
 
