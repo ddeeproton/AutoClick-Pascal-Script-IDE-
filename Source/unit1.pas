@@ -909,7 +909,6 @@ begin
       if index = 4 then Label5.Caption:='Move your mouse and press F1';
       if index = 5 then Label5.Caption:='Move your mouse and press F1 or F2';
       if index = 6 then Label5.Caption:='Move your mouse and press F1 or F2 or F3';
-      if (index = 7) and (index = 8) then Label5.Caption:='Copy the code';
     end;
   end
   else begin
@@ -917,10 +916,11 @@ begin
     begin
       Label5.Caption:='Select a function';
     end else begin
-      if index <= 6 then Label5.Caption:='Press button listen';
-      if (index = 7) and (index = 8) then Label5.Caption:='Copy the code';
+      if (index >= 0) and (index <= 6) then Label5.Caption:='Press button listen';
     end;
   end;
+
+  if (index = 7) or (index = 8) then Label5.Caption:='Copy the code';
 end;
 
 
