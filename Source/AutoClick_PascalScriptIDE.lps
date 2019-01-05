@@ -6,7 +6,7 @@
     <BuildModes Active="Default"/>
     <Units Count="9">
       <Unit0>
-        <Filename Value="PascalScriptIDE.lpr"/>
+        <Filename Value="AutoClick_PascalScriptIDE.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="29" Y="10"/>
@@ -21,7 +21,7 @@
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="819"/>
-        <CursorPos X="25" Y="838"/>
+        <CursorPos X="6" Y="834"/>
         <UsageCount Value="148"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

@@ -1,4 +1,4 @@
-program PascalScriptIDE;
+program AutoClick_PascalScriptIDE;
 
 {$mode objfpc}{$H+}
 
