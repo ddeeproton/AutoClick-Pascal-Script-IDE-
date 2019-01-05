@@ -853,7 +853,7 @@ begin
   index := ComboBoxCode.ItemIndex;
 
   if index = -1 then LabeledEdit1.Text := '';
-  if index = 0 then LabeledEdit1.Text := 'getColorHexPositionPix('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
+  if index = 0 then LabeledEdit1.Text := 'if getColorHexPositionPix('+IntToStr(P1_value)+', '+IntToStr(P2_value)+') = '''+P3_value+''' then';
   if index = 1 then LabeledEdit1.Text := 'MouseClick('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';   
   if index = 2 then LabeledEdit1.Text := 'waitColorHexPositionPix('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''');';
   if index = 3 then LabeledEdit1.Text := 'waitColorHexPositionPix2('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''', '+IntToStr(P4_value)+', '+IntToStr(P5_value)+', '''+P6_value+''');';
