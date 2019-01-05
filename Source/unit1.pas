@@ -29,6 +29,9 @@ type
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
     MenuItem2: TMenuItem;
@@ -58,6 +61,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    PopupMenuTrayIcon: TPopupMenu;
     PopupMenuSynEdit1: TPopupMenu;
     PopupMenuShellView: TPopupMenu;
     PSScript1: TPSScript;
@@ -79,6 +83,7 @@ type
     procedure ComboBoxCodeSelect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuItem10Click(Sender: TObject);
+    procedure MenuItem15Click(Sender: TObject);
     procedure MenuItemClearCacheClick(Sender: TObject);
     procedure MenuItemCopyClipClick(Sender: TObject);
     procedure MenuItemCreateDirClick(Sender: TObject);
@@ -191,6 +196,12 @@ begin
   or not FileExists(ShellTreeView1.Path) then Exit;
   MenuItemClearCacheClick(nil);
   ProcessScript.RunScriptThread(ShellTreeView1.Path);
+end;
+
+procedure TForm1.MenuItem15Click(Sender: TObject);
+begin
+  MenuItemStopClick(nil);
+  Application.Terminate;;
 end;
 
 
