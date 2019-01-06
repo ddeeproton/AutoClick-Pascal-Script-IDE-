@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterPas, uPSComponent, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
-  Windows, uprocess;
+  Windows, uprocess, ufiles;
 
 type
 
@@ -614,8 +614,8 @@ begin
     else
       AddLog('[File loaded] '+f.Replace(dataPath, ''));
 
-    Script.Script.Insert(0, 'program script;' + #13#10);
-    Script.Script.Add(#13#10 + 'end.');
+    Script.Script.Strings[0] := 'program script; ' + Script.Script.Strings[0] ;
+    Script.Script.Add(' end.');
     Compiled := Script.Compile();
     for i := 0 to Script.CompilerMessageCount - 1 do
       AddLog(Script.CompilerMessages[i].MessageToString);
@@ -762,14 +762,9 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string)');
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');
-{
-  ProcessTask = class
-    class procedure ExecAndContinue(sExe, sFile: string; wShowWin: Word);
-    class procedure ExecAndContinue(sExe, sFile: string);
-    class function KillTask(ExeFileName: string): Integer;
-    class procedure CloseProcessPID(pid: Integer);
-  end;
-}
+  Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
+  Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
+  Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;');
 
 end;
 
@@ -892,6 +887,12 @@ begin
   if index = 6 then LabeledEdit1.Text := 'play('+IntToStr(P1_value)+', '+IntToStr(P2_value)+', '''+P3_value+''', '+IntToStr(P4_value)+', '+IntToStr(P5_value)+', '''+P6_value+''', '+IntToStr(P7_value)+', '+IntToStr(P8_value)+'); ';
   if index = 7 then LabeledEdit1.Text := 'ExecAndContinue(''application.exe'', ''-parameters'');';
   if index = 8 then LabeledEdit1.Text := 'KillTask(''application.exe'');';
+  if index = 9 then LabeledEdit1.Text := 'ReadFromFile(''Filename.txt'');';
+  if index = 10 then LabeledEdit1.Text := 'WriteInFile(''Filename.txt'', ''content'');';
+  if index = 11 then LabeledEdit1.Text := 'makeDir(''DirectoryName'');';
+
+
+
 
   if Sender <> nil then TTimer(Sender).Enabled:=True;
 
@@ -919,7 +920,7 @@ begin
     end;
   end;
 
-  if (index = 7) or (index = 8) then Label5.Caption:='Copy the code';
+  if (index >= 7) then Label5.Caption:='Copy the code';
 end;
 
 

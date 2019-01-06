@@ -634,6 +634,9 @@ object Form1: TForm1
             'function play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean;'
             'procedure ExecAndContinue(sExe, sFile: string)'
             'function KillTask(ExeFileName: string): Integer;'
+            'function ReadFromFile(Filename: string):String;'
+            'procedure WriteInFile(Filename, txt: string);'
+            'function makeDir(path:string):Boolean;''); '
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
