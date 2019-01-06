@@ -737,8 +737,15 @@ end;
 
 
 procedure DoSleep(t: integer);
+var
+  i: Integer;
 begin
-  Sleep(t);
+  if t < 1000 then Exit;
+  for i := (t div 1000)  downto 0 do
+  begin
+    Log('Continue in '+IntToStr(i)+'...');
+    Sleep(1000);
+  end;
 end;
 
 
