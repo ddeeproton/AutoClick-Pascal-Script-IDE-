@@ -38,6 +38,7 @@ type
     MenuItem19: TMenuItem;
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
+    MenuItem22: TMenuItem;
     MenuItemDisableLog: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
@@ -153,6 +154,7 @@ var
   currentPath, dataPath: String;
   RunNextScript: string;
   CanEraseProcessScripts: Integer;
+  CanRun: Boolean;
 implementation
 
 {$R *.lfm}
@@ -184,6 +186,8 @@ begin
   Splitter4.Visible:=False;
 
   CanEraseProcessScripts := 0;
+
+  CanRun := False;
 end;
 
 
@@ -445,6 +449,7 @@ procedure TForm1.MenuItemRunFromCacheClick(Sender: TObject);
 begin
   if (ShellTreeView1.Path = '')
   or not FileExists(ShellTreeView1.Path) then Exit;
+  CanRun := True;
   ProcessScript.RunScriptThread(ShellTreeView1.Path);
 end;
 
@@ -484,6 +489,7 @@ procedure TForm1.MenuItemStopClick(Sender: TObject);
 var
   i: integer;
 begin
+  CanRun := False;
   if Length(ProcessScripts) = 0 then
   begin                    
       AddLog('[Stop] No process to stop');
@@ -523,6 +529,7 @@ class procedure ProcessScript.RunScriptThread(f: string);
 var
   p: ThreadProcess;
 begin
+  if not CanRun then Exit;
   p := Unit1.ThreadProcess.Create(True);
   p.fileExec := f;
   p.FreeOnTerminate := True;
@@ -576,6 +583,8 @@ var
   Script: TPSScript;
   nScript: String;
 begin
+  if not CanRun then Exit;
+
   with Form1 do
   begin
     Script := TPSScript.Create(nil);
@@ -675,6 +684,7 @@ begin
     Exit;
   end;
   MenuItemSaveClick(nil);
+  CanRun := True;
   ProcessScript.RunScriptThread(ShellTreeView1.Path);
 end;
 
@@ -827,6 +837,7 @@ end;
 procedure TForm1.SynEdit1KeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  {
   if (Shift = [ssCtrl]) and (Upcase(Char(Key)) = 'S') then
   begin
     MenuItemSaveClick(nil);
@@ -838,7 +849,7 @@ begin
   if (Shift = [ssCtrl]) and (Upcase(Char(Key)) = 'F') then
   begin
     MenuItemStopClick(nil);
-  end;
+  end;   }
 end;
 
 

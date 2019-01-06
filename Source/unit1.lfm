@@ -876,6 +876,11 @@ object Form1: TForm1
       ShortCut = 16454
       OnClick = MenuItemStopClick
     end
+    object MenuItem22: TMenuItem
+      Caption = 'Save'
+      ShortCut = 16467
+      OnClick = MenuItemSaveClick
+    end
     object MenuItem21: TMenuItem
       Caption = '-'
     end
