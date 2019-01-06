@@ -798,7 +798,7 @@ object Form1: TForm1
     left = 48
     top = 56
     object MenuItemRunAndSave: TMenuItem
-      Caption = 'Save and Run'
+      Caption = 'Run and Save'
       ShortCut = 16452
       OnClick = ButtonRunClick
     end
@@ -866,6 +866,19 @@ object Form1: TForm1
   object PopupMenuSynEdit1: TPopupMenu
     left = 304
     top = 296
+    object MenuItem19: TMenuItem
+      Caption = 'Run and Save'
+      ShortCut = 16452
+      OnClick = ButtonRunClick
+    end
+    object MenuItem20: TMenuItem
+      Caption = 'Stop'
+      ShortCut = 16454
+      OnClick = MenuItemStopClick
+    end
+    object MenuItem21: TMenuItem
+      Caption = '-'
+    end
     object MenuItemCopyClip: TMenuItem
       Caption = 'Copy'
       OnClick = MenuItemCopyClipClick

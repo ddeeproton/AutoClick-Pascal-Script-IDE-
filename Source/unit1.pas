@@ -35,6 +35,9 @@ type
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    MenuItem20: TMenuItem;
+    MenuItem21: TMenuItem;
     MenuItemDisableLog: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
