@@ -862,6 +862,7 @@ var
   P6_value: String = '';
   P7_value: Integer = 0;
   P8_value: Integer = 0;
+  VK_F4_pressed: Boolean = False;
 
 procedure TForm1.TimerRecordTimer(Sender: TObject);
 var
@@ -894,6 +895,20 @@ begin
     P7_value := p.position.x;
     P8_value := p.position.y;
     p.Free;
+  end;
+
+  if Actions.IsKeyPressed(VK_F4) then
+  begin
+    if Panel4.Visible then
+    begin
+      if not VK_F4_pressed then
+      begin
+        VK_F4_pressed := True;
+        ButtonCodeInsertClick(nil);
+      end;
+    end;
+  end else begin
+    VK_F4_pressed := False;
   end;
 
   index := ComboBoxCode.ItemIndex;
