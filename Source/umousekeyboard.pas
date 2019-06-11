@@ -18,6 +18,9 @@ type
       class function getPositionPix(x,y: Integer):TPixelColor;
       class function getMousePix():TPixelColor;
       class procedure MouseClick(x,y: Integer);
+      class procedure MouseMove(x,y: Integer);
+      class procedure MouseDown();
+      class procedure MouseUp();
       class function IsControlKeyPressed(): Boolean;
       class function IsKeyPressed(key:longint): Boolean;
       class procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
@@ -72,10 +75,29 @@ begin
   result := Actions.getPositionPix(CursorPos.x, CursorPos.y);
 end;
 
+
 class procedure Actions.MouseClick(x,y: Integer);
 begin
   SetCursorPos(x, y);
   Mouse_Event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+  Mouse_Event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+end;
+
+
+
+
+class procedure Actions.MouseMove(x,y: Integer);
+begin
+  SetCursorPos(x, y);
+end;
+
+class procedure Actions.MouseDown();
+begin
+  Mouse_Event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+end;
+
+class procedure Actions.MouseUp();
+begin
   Mouse_Event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 end;
 

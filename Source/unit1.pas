@@ -792,6 +792,9 @@ begin
   Sender.AddFunction(@RunScriptAndContinue,'procedure RunScriptAndContinue(const f: String)');
   Sender.AddMethod(Actions, @Actions.getColorHexPositionPix, 'function getColorHexPositionPix(x,y: Integer):String;');
   Sender.AddMethod(Actions, @Actions.MouseClick, 'procedure MouseClick(x,y: Integer);');
+  Sender.AddMethod(Actions, @Actions.MouseMove, 'procedure MouseMove(x,y: Integer);');
+  Sender.AddMethod(Actions, @Actions.MouseDown, 'procedure MouseDown();');
+  Sender.AddMethod(Actions, @Actions.MouseUp, 'procedure MouseUp();');
   Sender.AddMethod(Actions, @Actions.IsControlKeyPressed, 'function IsControlKeyPressed(): Boolean;');
   Sender.AddMethod(Actions, @Actions.IsKeyPressed, 'function IsKeyPressed(key:longint): Boolean;');
   Sender.AddMethod(Actions, @Actions.waitColorHexPositionPix2, 'procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);');
