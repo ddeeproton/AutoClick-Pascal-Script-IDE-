@@ -61,9 +61,14 @@ KillTask('AutoClick_PascalScriptIDE_2.exe');
 ```
 
 ### v 0.3
-Allow to Drag and Drop now. New functions are added:
+New functions are added:
 ```
   procedure MouseMove(x,y: Integer);
   procedure MouseDown();
   procedure MouseUp();
+```
+### v 0.4
+New function is added
+```
+  procedure MouseMoveRelative(x,y: Integer);
 ```

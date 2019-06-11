@@ -19,6 +19,7 @@ type
       class function getMousePix():TPixelColor;
       class procedure MouseClick(x,y: Integer);
       class procedure MouseMove(x,y: Integer);
+      class procedure MouseMoveRelative(x,y: Integer);
       class procedure MouseDown();
       class procedure MouseUp();
       class function IsControlKeyPressed(): Boolean;
@@ -90,6 +91,12 @@ class procedure Actions.MouseMove(x,y: Integer);
 begin
   SetCursorPos(x, y);
 end;
+
+class procedure Actions.MouseMoveRelative(x,y: Integer);
+begin
+  mouse_event(MOUSEEVENTF_MOVE, x, y, 0, 0);
+end;
+
 
 class procedure Actions.MouseDown();
 begin

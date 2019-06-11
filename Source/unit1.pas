@@ -257,7 +257,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.3'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.4'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -793,6 +793,7 @@ begin
   Sender.AddMethod(Actions, @Actions.getColorHexPositionPix, 'function getColorHexPositionPix(x,y: Integer):String;');
   Sender.AddMethod(Actions, @Actions.MouseClick, 'procedure MouseClick(x,y: Integer);');
   Sender.AddMethod(Actions, @Actions.MouseMove, 'procedure MouseMove(x,y: Integer);');
+  Sender.AddMethod(Actions, @Actions.MouseMoveRelative, 'procedure MouseMoveRelative(x,y: Integer);');
   Sender.AddMethod(Actions, @Actions.MouseDown, 'procedure MouseDown();');
   Sender.AddMethod(Actions, @Actions.MouseUp, 'procedure MouseUp();');
   Sender.AddMethod(Actions, @Actions.IsControlKeyPressed, 'function IsControlKeyPressed(): Boolean;');
@@ -951,8 +952,9 @@ begin
   if index = 10 then LabeledEdit1.Text := 'WriteInFile(''Filename.txt'', ''content'');';
   if index = 11 then LabeledEdit1.Text := 'makeDir(''DirectoryName'');';
   if index = 12 then LabeledEdit1.Text := 'MouseMove('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
-  if index = 13 then LabeledEdit1.Text := 'MouseDown();';
-  if index = 14 then LabeledEdit1.Text := 'MouseUp();';
+  if index = 13 then LabeledEdit1.Text := 'MouseMoveRelative('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
+  if index = 14 then LabeledEdit1.Text := 'MouseDown();';
+  if index = 15 then LabeledEdit1.Text := 'MouseUp();';
 
 
 
@@ -971,8 +973,9 @@ begin
       if index = 3 then Label5.Caption:='Move your mouse and press F1 or F2';
       if index = 4 then Label5.Caption:='Move your mouse and press F1';
       if index = 5 then Label5.Caption:='Move your mouse and press F1 or F2';
-      if index = 6 then Label5.Caption:='Move your mouse and press F1 or F2 or F3';  
+      if index = 6 then Label5.Caption:='Move your mouse and press F1 or F2 or F3';
       if index = 12 then Label5.Caption:='Move your mouse and press F1';
+      if index = 13 then Label5.Caption:='Move your mouse and press F1';
     end;
   end
   else begin
