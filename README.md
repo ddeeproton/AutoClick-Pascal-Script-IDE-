@@ -38,21 +38,21 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');  
 end;
-
+```
 ## Changes
 
 ### v 0.2
 Allow to start a pascal script on application start, if a ".pss" file is set in parameter to AutoClick_PascalScriptIDE.exe 
 
 Like this (Batch script):
-
+```
 AutoClick_PascalScriptIDE.exe "myscript.pss" 
-
+```
 You can also duplicate "AutoClick_PascalScriptIDE.exe" into a new name, and manage it from PascalScript code:
 
 Like this (Pascal Script):
-
+```
 ExecAndContinue('AutoClick_PascalScriptIDE_2.exe','MyScriptToStart.pss /');
 
 KillTask('AutoClick_PascalScriptIDE_2.exe'); 
-
+```
