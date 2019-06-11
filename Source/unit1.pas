@@ -39,6 +39,7 @@ type
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
     MenuItem22: TMenuItem;
+    MenuItemAbout: TMenuItem;
     MenuItemDisableLog: TMenuItem;
     MenuItemFunctionGenerator: TMenuItem;
     MenuItem1Options: TMenuItem;
@@ -94,6 +95,7 @@ type
     procedure MenuItem15Click(Sender: TObject);
     procedure MenuItem17Click(Sender: TObject);
     procedure MenuItem18Click(Sender: TObject);
+    procedure MenuItemAboutClick(Sender: TObject);
     procedure MenuItemClearCacheClick(Sender: TObject);
     procedure MenuItemCopyClipClick(Sender: TObject);
     procedure MenuItemCreateDirClick(Sender: TObject);
@@ -169,6 +171,7 @@ end;
 
 
 procedure TForm1.FormCreate(Sender: TObject);
+var i: Integer;
 begin
   SynEdit1.Clear;   
   SynEdit1.Enabled := False;
@@ -188,6 +191,19 @@ begin
   CanEraseProcessScripts := 0;
 
   CanRun := False;
+
+  if ParamCount > 0 then
+  begin
+    for i := 0 to ParamCount - 1 do
+    begin
+      if FileExists(dataPath+'\'+ParamStr(i)) and ParamStr(i).EndsWith('.pss') then
+      begin
+        CanRun := True;
+        ProcessScript.RunScriptThread(dataPath+'\'+ParamStr(i));
+      end;
+    end;
+  end;
+
 end;
 
 
@@ -237,6 +253,11 @@ procedure TForm1.MenuItem18Click(Sender: TObject);
 begin
   Show;
   BringToFront;
+end;
+
+procedure TForm1.MenuItemAboutClick(Sender: TObject);
+begin
+  ShowMessage('Version: 0.2'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
