@@ -20,8 +20,8 @@ type
       class procedure MouseClick(x,y: Integer);
       class procedure MouseMove(x,y: Integer);
       class procedure MouseMoveRelative(x,y: Integer);
-      class procedure MouseDown();
-      class procedure MouseUp();
+      class procedure MouseDown(x,y: Integer);
+      class procedure MouseUp(x,y: Integer);
       class function IsControlKeyPressed(): Boolean;
       class function IsKeyPressed(key:longint): Boolean;
       class procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
@@ -98,14 +98,14 @@ begin
 end;
 
 
-class procedure Actions.MouseDown();
+class procedure Actions.MouseDown(x,y: Integer);
 begin
-  Mouse_Event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+  Mouse_Event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
 end;
 
-class procedure Actions.MouseUp();
+class procedure Actions.MouseUp(x,y: Integer);
 begin
-  Mouse_Event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+  Mouse_Event(MOUSEEVENTF_ABSOLUTE + MOUSEEVENTF_MOVE + MOUSEEVENTF_LEFTDOWN + MOUSEEVENTF_LEFTUP, x, y, 0, 0);
 end;
 
 class function Actions.IsControlKeyPressed(): Boolean;

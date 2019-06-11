@@ -257,7 +257,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.4'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.5'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -794,8 +794,8 @@ begin
   Sender.AddMethod(Actions, @Actions.MouseClick, 'procedure MouseClick(x,y: Integer);');
   Sender.AddMethod(Actions, @Actions.MouseMove, 'procedure MouseMove(x,y: Integer);');
   Sender.AddMethod(Actions, @Actions.MouseMoveRelative, 'procedure MouseMoveRelative(x,y: Integer);');
-  Sender.AddMethod(Actions, @Actions.MouseDown, 'procedure MouseDown();');
-  Sender.AddMethod(Actions, @Actions.MouseUp, 'procedure MouseUp();');
+  Sender.AddMethod(Actions, @Actions.MouseDown, 'procedure MouseDown(x,y: Integer);');
+  Sender.AddMethod(Actions, @Actions.MouseUp, 'procedure MouseUp(x,y: Integer);');
   Sender.AddMethod(Actions, @Actions.IsControlKeyPressed, 'function IsControlKeyPressed(): Boolean;');
   Sender.AddMethod(Actions, @Actions.IsKeyPressed, 'function IsKeyPressed(key:longint): Boolean;');
   Sender.AddMethod(Actions, @Actions.waitColorHexPositionPix2, 'procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);');
@@ -953,8 +953,8 @@ begin
   if index = 11 then LabeledEdit1.Text := 'makeDir(''DirectoryName'');';
   if index = 12 then LabeledEdit1.Text := 'MouseMove('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
   if index = 13 then LabeledEdit1.Text := 'MouseMoveRelative('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
-  if index = 14 then LabeledEdit1.Text := 'MouseDown();';
-  if index = 15 then LabeledEdit1.Text := 'MouseUp();';
+  if index = 14 then LabeledEdit1.Text := 'MouseDown('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
+  if index = 15 then LabeledEdit1.Text := 'MouseUp('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
 
 
 

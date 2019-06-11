@@ -72,3 +72,9 @@ New function is added
 ```
   procedure MouseMoveRelative(x,y: Integer);
 ```
+### v 0.5
+Function modified
+```
+  procedure MouseDown(x,y: Integer);
+  procedure MouseUp(x,y: Integer);
+```
