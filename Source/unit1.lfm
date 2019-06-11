@@ -637,6 +637,9 @@ object Form1: TForm1
             'function ReadFromFile(Filename: string):String;'
             'procedure WriteInFile(Filename, txt: string);'
             'function makeDir(path:string):Boolean;''); '
+            'procedure MouseMove(x,y: Integer);'
+            'procedure MouseDown();'
+            'procedure MouseUp();'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList

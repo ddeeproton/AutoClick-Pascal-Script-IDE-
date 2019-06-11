@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos Y="21"/>
-        <UsageCount Value="187"/>
+        <UsageCount Value="189"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,10 +21,10 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="258"/>
-        <CursorPos X="28" Y="260"/>
+        <TopLine Value="942"/>
+        <CursorPos X="13" Y="956"/>
         <FoldState Value=" T3qL031 T0vQ63g"/>
-        <UsageCount Value="187"/>
+        <UsageCount Value="189"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -35,7 +35,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="9"/>
         <CursorPos Y="21"/>
-        <UsageCount Value="163"/>
+        <UsageCount Value="165"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -44,7 +44,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="25"/>
         <CursorPos Y="11"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -52,7 +52,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
         <CursorPos Y="10"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -61,7 +61,7 @@
         <UnitName Value="FilesManager"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="24" Y="9"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="46"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\components\PascalScript\Source\uPSCompiler.pas"/>
