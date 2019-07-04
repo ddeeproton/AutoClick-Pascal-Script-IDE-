@@ -40,6 +40,10 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string)');
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');  
+  Sender.AddMethod(ScreenManager, @ScreenManager.PrintScreen, 'function PrintScreen(filename: String): Boolean;');
+  Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
+  Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
+  Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;'); 
 end;
 ```
 ## Changes
@@ -78,3 +82,9 @@ Function modified
   procedure MouseDown(x,y: Integer);
   procedure MouseUp(x,y: Integer);
 ```
+### v 0.6
+New function is added
+```
+  function PrintScreen(filename: String): Boolean;  
+```
+

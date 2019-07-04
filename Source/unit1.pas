@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterPas, uPSComponent, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
-  Windows, uprocess, ufiles;
+  Windows, uprocess, ufiles, UScreenManager;
 
 type
 
@@ -257,7 +257,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.5'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.6'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -807,6 +807,7 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string)');
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');
+  Sender.AddMethod(ScreenManager, @ScreenManager.PrintScreen, 'function PrintScreen(filename: String): Boolean;');
   Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
   Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;');
