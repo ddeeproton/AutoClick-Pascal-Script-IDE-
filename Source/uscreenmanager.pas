@@ -31,14 +31,11 @@ var Image_Bmp:TBitmap;
     end;
 begin
   Screen := 0;
+  ClipBoard.Clear;
   keybd_event(KeyPrintScreen, Screen, 0, 0);
-  //Application.ProcessMessages;
+  keybd_event(KeyPrintScreen, Screen, KEYEVENTF_KEYUP, 0);
 
-  if not ClipBoard.HasFormat(cf_BitMap) then
-  begin
-    PrintScreen(filename);
-    Exit;
-  end;
+  Sleep(1000);
 
   //Si le presse-papier contient un bitmap
   if ClipBoard.HasFormat(cf_BitMap) then

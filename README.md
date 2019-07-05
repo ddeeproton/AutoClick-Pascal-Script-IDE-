@@ -88,3 +88,6 @@ New function is added
   function PrintScreen(filename: String): Boolean;  
 ```
 
+### v 0.7
+Bug fix with PrintScreen. On repeated call. 
+

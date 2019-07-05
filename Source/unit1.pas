@@ -257,7 +257,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.6'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.7'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
