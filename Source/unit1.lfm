@@ -641,6 +641,7 @@ object Form1: TForm1
             'procedure MouseMoveRelative(x,y: Integer);'
             'procedure MouseDown();'
             'procedure MouseUp();'
+            'function FileExists(Const FileName:String): Boolean;'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList

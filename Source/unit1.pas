@@ -179,7 +179,8 @@ begin
   RunNextScript:= '';
   currentPath := ExtractFileDir(Application.ExeName);
   dataPath := currentPath + '\data';
-  if not DirectoryExists(dataPath) then mkdir(dataPath);
+  if not DirectoryExists(dataPath) then mkdir(dataPath);   
+  SetCurrentDir(dataPath);
   ShellTreeView1.Root := dataPath;
                                             
   Form1.Caption:=ShellTreeView1.Path;
@@ -257,7 +258,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.7'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.8'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -782,6 +783,10 @@ begin
   end;
 end;
 
+function DoFileExists(FileName:String): Boolean;
+begin
+  result := FileExists(FileName);
+end;
 
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
 begin
@@ -811,6 +816,7 @@ begin
   Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
   Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;');
+  Sender.AddFunction(@DoFileExists, 'function FileExists(Const FileName:String): Boolean;');
 
 end;
 

@@ -89,5 +89,12 @@ New function is added
 ```
 
 ### v 0.7
-Bug fix with PrintScreen. On repeated call. 
+Bug fix with PrintScreen. On repeated call.
+ 
+### v 0.8
+Bug fix - Current default path is set to database directory
+New function is added
+```
+  function FileExists(Const FileName:String): Boolean;
+```
 
