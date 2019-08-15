@@ -41,6 +41,8 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');  
   Sender.AddMethod(ScreenManager, @ScreenManager.PrintScreen, 'function PrintScreen(filename: String): Boolean;');
+  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosX, 'function getMousePosX(): Integer;');
+  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosY, 'function getMousePosY(): Integer;');  
   Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
   Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;'); 
@@ -96,5 +98,12 @@ Bug fix - Current default path is set to database directory
 New function is added
 ```
   function FileExists(Const FileName:String): Boolean;
+```
+
+### v 0.9
+New functions are added
+```
+  function getMousePosX(): Integer;
+  function getMousePosY(): Integer;
 ```
 

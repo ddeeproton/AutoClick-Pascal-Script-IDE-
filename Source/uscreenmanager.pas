@@ -5,15 +5,28 @@ unit UScreenManager;
 interface
 
 uses
-  Classes, SysUtils, Clipbrd, Windows, Graphics, Forms;
+  Classes, SysUtils, Clipbrd, Windows, Graphics, Forms, Controls;
 
 type
   ScreenManager = class
     class function PrintScreen(filename: String): Boolean;
+    class function getMousePosX: Integer;        
+    class function getMousePosY: Integer;
   end;
 
 
 implementation
+
+
+class function ScreenManager.getMousePosX: Integer;
+begin
+  result := Mouse.CursorPos.x;
+end;
+
+class function ScreenManager.getMousePosY: Integer;
+begin
+  result := Mouse.CursorPos.y;
+end;
 
 class function ScreenManager.PrintScreen(filename: String): Boolean;
 Const KeyPrintScreen = 44; //Touche Prt Scr du clavier

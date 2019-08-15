@@ -173,6 +173,9 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 var i: Integer;
 begin
+
+
+
   SynEdit1.Clear;   
   SynEdit1.Enabled := False;
   Memo2.Clear;
@@ -258,7 +261,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.8'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.9'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -813,6 +816,8 @@ begin
   Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
   Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');
   Sender.AddMethod(ScreenManager, @ScreenManager.PrintScreen, 'function PrintScreen(filename: String): Boolean;');
+  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosX, 'function getMousePosX(): Integer;');
+  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosY, 'function getMousePosY(): Integer;');
   Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
   Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;');
@@ -962,6 +967,9 @@ begin
   if index = 13 then LabeledEdit1.Text := 'MouseMoveRelative('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
   if index = 14 then LabeledEdit1.Text := 'MouseDown('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
   if index = 15 then LabeledEdit1.Text := 'MouseUp('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
+  if index = 16 then LabeledEdit1.Text := 'FileExists('');';
+  if index = 17 then LabeledEdit1.Text := 'getMousePosX();';
+  if index = 18 then LabeledEdit1.Text := 'getMousePosY();';
 
 
 

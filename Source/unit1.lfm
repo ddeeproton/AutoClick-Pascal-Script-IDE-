@@ -1,27 +1,27 @@
 object Form1: TForm1
-  Left = 279
+  Left = 57
   Height = 525
-  Top = 125
+  Top = 127
   Width = 817
   Caption = 'Pascal Script IDE v1.0'
-  ClientHeight = 506
+  ClientHeight = 505
   ClientWidth = 817
   Menu = MainMenu1
   OnCreate = FormCreate
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '2.0.0.4'
   object Panel2: TPanel
     Left = 0
-    Height = 506
+    Height = 505
     Top = 0
     Width = 171
     Align = alLeft
     Caption = 'Panel2'
-    ClientHeight = 506
+    ClientHeight = 505
     ClientWidth = 171
     TabOrder = 0
     object ShellTreeView1: TShellTreeView
       Left = 1
-      Height = 363
+      Height = 362
       Top = 1
       Width = 169
       Align = alClient
@@ -43,7 +43,7 @@ object Form1: TForm1
     object ListBox1: TListBox
       Left = 1
       Height = 125
-      Top = 380
+      Top = 379
       Width = 169
       Align = alBottom
       Font.Height = -15
@@ -55,7 +55,7 @@ object Form1: TForm1
       Cursor = crVSplit
       Left = 1
       Height = 16
-      Top = 364
+      Top = 363
       Width = 169
       Align = alBottom
       ResizeAnchor = akBottom
@@ -63,18 +63,18 @@ object Form1: TForm1
   end
   object Panel3: TPanel
     Left = 186
-    Height = 506
+    Height = 505
     Top = 0
     Width = 631
     Align = alClient
     Caption = 'Panel3'
-    ClientHeight = 506
+    ClientHeight = 505
     ClientWidth = 631
     TabOrder = 1
     object Memo2: TMemo
       Left = 1
       Height = 125
-      Top = 380
+      Top = 379
       Width = 629
       Align = alBottom
       Font.Height = -15
@@ -89,24 +89,24 @@ object Form1: TForm1
       Cursor = crVSplit
       Left = 1
       Height = 16
-      Top = 364
+      Top = 363
       Width = 629
       Align = alBottom
       ResizeAnchor = akBottom
     end
     object Panel1: TPanel
       Left = 1
-      Height = 363
+      Height = 362
       Top = 1
       Width = 629
       Align = alClient
       Caption = 'Panel1'
-      ClientHeight = 363
+      ClientHeight = 362
       ClientWidth = 629
       TabOrder = 2
       inline SynEdit1: TSynEdit
         Left = 1
-        Height = 213
+        Height = 212
         Top = 149
         Width = 627
         Align = alClient
@@ -619,11 +619,11 @@ object Form1: TForm1
         TabOrder = 1
         object ComboBoxCode: TComboBox
           Left = 8
-          Height = 21
+          Height = 23
           Top = 40
           Width = 523
           Anchors = [akTop, akLeft, akRight]
-          ItemHeight = 13
+          ItemHeight = 15
           Items.Strings = (
             'function getColorHexPositionPix(x,y: Integer):String;'
             'procedure MouseClick(x,y: Integer);'
@@ -642,6 +642,8 @@ object Form1: TForm1
             'procedure MouseDown();'
             'procedure MouseUp();'
             'function FileExists(Const FileName:String): Boolean;'
+            'function getMousePosX(): Integer;'
+            'function getMousePosY(): Integer;'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
@@ -682,17 +684,11 @@ object Form1: TForm1
           TabOrder = 2
           object LabeledEdit1: TLabeledEdit
             Left = 8
-            Height = 21
-            Top = 18
+            Height = 23
+            Top = 16
             Width = 443
             Anchors = [akLeft, akRight, akBottom]
-            EditLabel.AnchorSideLeft.Control = LabeledEdit1
-            EditLabel.AnchorSideRight.Control = LabeledEdit1
-            EditLabel.AnchorSideRight.Side = asrBottom
-            EditLabel.AnchorSideBottom.Control = LabeledEdit1
-            EditLabel.Left = 8
-            EditLabel.Height = 13
-            EditLabel.Top = 2
+            EditLabel.Height = 15
             EditLabel.Width = 443
             EditLabel.Caption = 'Code generated:'
             EditLabel.ParentColor = False
@@ -744,7 +740,7 @@ object Form1: TForm1
   end
   object Splitter2: TSplitter
     Left = 171
-    Height = 506
+    Height = 505
     Top = 0
     Width = 15
   end
