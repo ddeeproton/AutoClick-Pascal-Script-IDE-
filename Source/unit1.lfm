@@ -1,27 +1,27 @@
 object Form1: TForm1
-  Left = 57
+  Left = 259
   Height = 525
-  Top = 127
+  Top = 141
   Width = 817
   Caption = 'Pascal Script IDE v1.0'
-  ClientHeight = 505
+  ClientHeight = 506
   ClientWidth = 817
   Menu = MainMenu1
   OnCreate = FormCreate
-  LCLVersion = '2.0.0.4'
+  LCLVersion = '1.8.2.0'
   object Panel2: TPanel
     Left = 0
-    Height = 505
+    Height = 506
     Top = 0
     Width = 171
     Align = alLeft
     Caption = 'Panel2'
-    ClientHeight = 505
+    ClientHeight = 506
     ClientWidth = 171
     TabOrder = 0
     object ShellTreeView1: TShellTreeView
       Left = 1
-      Height = 362
+      Height = 363
       Top = 1
       Width = 169
       Align = alClient
@@ -43,7 +43,7 @@ object Form1: TForm1
     object ListBox1: TListBox
       Left = 1
       Height = 125
-      Top = 379
+      Top = 380
       Width = 169
       Align = alBottom
       Font.Height = -15
@@ -55,7 +55,7 @@ object Form1: TForm1
       Cursor = crVSplit
       Left = 1
       Height = 16
-      Top = 363
+      Top = 364
       Width = 169
       Align = alBottom
       ResizeAnchor = akBottom
@@ -63,18 +63,18 @@ object Form1: TForm1
   end
   object Panel3: TPanel
     Left = 186
-    Height = 505
+    Height = 506
     Top = 0
     Width = 631
     Align = alClient
     Caption = 'Panel3'
-    ClientHeight = 505
+    ClientHeight = 506
     ClientWidth = 631
     TabOrder = 1
     object Memo2: TMemo
       Left = 1
       Height = 125
-      Top = 379
+      Top = 380
       Width = 629
       Align = alBottom
       Font.Height = -15
@@ -89,24 +89,24 @@ object Form1: TForm1
       Cursor = crVSplit
       Left = 1
       Height = 16
-      Top = 363
+      Top = 364
       Width = 629
       Align = alBottom
       ResizeAnchor = akBottom
     end
     object Panel1: TPanel
       Left = 1
-      Height = 362
+      Height = 363
       Top = 1
       Width = 629
       Align = alClient
       Caption = 'Panel1'
-      ClientHeight = 362
+      ClientHeight = 363
       ClientWidth = 629
       TabOrder = 2
       inline SynEdit1: TSynEdit
         Left = 1
-        Height = 212
+        Height = 213
         Top = 149
         Width = 627
         Align = alClient
@@ -619,11 +619,11 @@ object Form1: TForm1
         TabOrder = 1
         object ComboBoxCode: TComboBox
           Left = 8
-          Height = 23
+          Height = 21
           Top = 40
           Width = 523
           Anchors = [akTop, akLeft, akRight]
-          ItemHeight = 15
+          ItemHeight = 13
           Items.Strings = (
             'function getColorHexPositionPix(x,y: Integer):String;'
             'procedure MouseClick(x,y: Integer);'
@@ -642,8 +642,11 @@ object Form1: TForm1
             'procedure MouseDown();'
             'procedure MouseUp();'
             'function FileExists(Const FileName:String): Boolean;'
+            'function EraseFile(Const FileName:String): Boolean;'
             'function getMousePosX(): Integer;'
             'function getMousePosY(): Integer;'
+            'function getClipboard: String;   '
+            'procedure setClipboard(txt: String);'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
@@ -684,11 +687,17 @@ object Form1: TForm1
           TabOrder = 2
           object LabeledEdit1: TLabeledEdit
             Left = 8
-            Height = 23
-            Top = 16
+            Height = 21
+            Top = 18
             Width = 443
             Anchors = [akLeft, akRight, akBottom]
-            EditLabel.Height = 15
+            EditLabel.AnchorSideLeft.Control = LabeledEdit1
+            EditLabel.AnchorSideRight.Control = LabeledEdit1
+            EditLabel.AnchorSideRight.Side = asrBottom
+            EditLabel.AnchorSideBottom.Control = LabeledEdit1
+            EditLabel.Left = 8
+            EditLabel.Height = 13
+            EditLabel.Top = 2
             EditLabel.Width = 443
             EditLabel.Caption = 'Code generated:'
             EditLabel.ParentColor = False
@@ -740,7 +749,7 @@ object Form1: TForm1
   end
   object Splitter2: TSplitter
     Left = 171
-    Height = 505
+    Height = 506
     Top = 0
     Width = 15
   end

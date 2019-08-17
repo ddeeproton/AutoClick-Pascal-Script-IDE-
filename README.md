@@ -57,7 +57,7 @@ Like this (Batch script):
 ```
 AutoClick_PascalScriptIDE.exe "myscript.pss" 
 ```
-You can also duplicate "AutoClick_PascalScriptIDE.exe" into a new name, and manage it from PascalScript code:
+You can also copy "AutoClick_PascalScriptIDE.exe" into a new name, and manage it from PascalScript code:
 
 Like this (Pascal Script):
 ```
@@ -105,5 +105,14 @@ New functions are added
 ```
   function getMousePosX(): Integer;
   function getMousePosY(): Integer;
+```
+
+### v 0.10
+Add relative path in exemples for creation new script
+New functions are added
+```
+  function EraseFile(Const FileName:String): Boolean;
+  function getClipboard: String;
+  procedure setClipboard(txt: String);
 ```
 

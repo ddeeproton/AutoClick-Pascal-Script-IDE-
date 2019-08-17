@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterPas, uPSComponent, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
-  Windows, uprocess, ufiles, UScreenManager;
+  Windows, uprocess, ufiles, UScreenManager, Clipbrd;
 
 type
 
@@ -261,7 +261,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.9'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.10'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -375,7 +375,7 @@ end;
 
 procedure TForm1.MenuItemNewFileClick(Sender: TObject);
 var
-  filescript, cdir: string;
+  filescript, cdir, relativePath: string;
 begin
 
   if DirectoryExists(ShellTreeView1.Path) then
@@ -393,13 +393,15 @@ begin
     Exit;
   end;
 
+  relativePath := Copy(cdir, Length(dataPath)+2, Length(cdir) - Length(dataPath) + Length(filescript)-1);
+
   SynEdit1.Clear;
   SynEdit1.Lines.Add('//var i: Integer;');
   SynEdit1.Lines.Add('begin');
-  SynEdit1.Lines.Add('//RunScript('''+filescript+'.pss''); ');
-  SynEdit1.Lines.Add('//RunScriptAndContinue('''+filescript+'.pss''); ');
-  SynEdit1.Lines.Add('//SetNextScript('''+filescript+'.pss''); ');
-  SynEdit1.Lines.Add('//Log('''+filescript+'.pss''); ');
+  SynEdit1.Lines.Add('//RunScript('''+relativePath+filescript+'.pss''); ');
+  SynEdit1.Lines.Add('//RunScriptAndContinue('''+relativePath+filescript+'.pss''); ');
+  SynEdit1.Lines.Add('//SetNextScript('''+relativePath+filescript+'.pss''); ');
+  SynEdit1.Lines.Add('//Log('''+relativePath+filescript+'.pss''); ');
   SynEdit1.Lines.Add('');
   SynEdit1.Lines.SaveToFile(cdir+filescript+'.pss');
   ShellTreeView1.Root := currentPath;
@@ -791,6 +793,22 @@ begin
   result := FileExists(FileName);
 end;
 
+function DoEraseFile(FileName:String): Boolean;
+begin
+  result := DeleteFile(PChar(FileName));
+end;
+                                  
+
+function getClipboard(): String;
+begin
+  result := Clipboard.AsText;
+end;
+
+procedure setClipboard(txt: String);
+begin
+  Clipboard.AsText := txt;
+end;
+
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
 begin
   Sender.AddFunction(@SetNextScript, 'procedure SetNextScript(const s: string)');
@@ -822,6 +840,10 @@ begin
   Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;');
   Sender.AddFunction(@DoFileExists, 'function FileExists(Const FileName:String): Boolean;');
+  Sender.AddFunction(@DoEraseFile, 'function EraseFile(Const FileName:String): Boolean;');
+  Sender.AddFunction(@getClipboard, 'function getClipboard(): String');
+  Sender.AddFunction(@setClipboard, 'procedure setClipboard(txt: String);');
+
 
 end;
 
@@ -967,9 +989,13 @@ begin
   if index = 13 then LabeledEdit1.Text := 'MouseMoveRelative('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
   if index = 14 then LabeledEdit1.Text := 'MouseDown('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
   if index = 15 then LabeledEdit1.Text := 'MouseUp('+IntToStr(P1_value)+', '+IntToStr(P2_value)+');';
-  if index = 16 then LabeledEdit1.Text := 'FileExists('');';
-  if index = 17 then LabeledEdit1.Text := 'getMousePosX();';
-  if index = 18 then LabeledEdit1.Text := 'getMousePosY();';
+  if index = 16 then LabeledEdit1.Text := 'FileExists(''Filename.txt'');';        
+  if index = 17 then LabeledEdit1.Text := 'EraseFile(''Filename.txt'');';
+  if index = 18 then LabeledEdit1.Text := 'getMousePosX();';
+  if index = 19 then LabeledEdit1.Text := 'getMousePosY();';
+  if index = 20 then LabeledEdit1.Text := 'getClipboard();';
+  if index = 21 then LabeledEdit1.Text := 'setClipboard(''content'');';
+                                         
 
 
 
