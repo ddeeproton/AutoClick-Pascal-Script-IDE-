@@ -5,7 +5,7 @@ unit UMouseKeyboard;
 interface
 
 uses
-  Classes, SysUtils, Windows;
+  Classes, SysUtils, Windows, Clipbrd;
 
 type
     TPixelColor = class
@@ -29,6 +29,9 @@ type
       class procedure waitNotColorHexPositionPix(x,y: Integer; hex:String);
       class procedure waitNotColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
       class function IsShiftlKeyPressed(): Boolean;
+      class procedure PressControlA;
+      class procedure PressControlC;
+      class procedure PressControlV;
     end;
 
     Game = class
@@ -36,6 +39,10 @@ type
     end;
 
 implementation
+
+
+
+
 
 
 procedure SplitStr(const Source, Delimiter: String; var DelimitedList: TStringList);
@@ -199,6 +206,30 @@ begin
   Result := GetKeyState(VK_SHIFT) < 0;
 end;
 
+class procedure Actions.PressControlA;
+begin
+  Keybd_Event(VK_CONTROL,   1, 0, 0);
+  Keybd_Event(VK_A,   1, 0, 0);
+  Keybd_Event(VK_A, 1, KEYEVENTF_KEYUP, 0);
+  Keybd_Event(VK_CONTROL, 1, KEYEVENTF_KEYUP, 0);
+end;
+
+class procedure Actions.PressControlC;
+begin
+  Keybd_Event(VK_CONTROL,   1, 0, 0);
+  Keybd_Event(VK_C,   1, 0, 0);
+  Keybd_Event(VK_C, 1, KEYEVENTF_KEYUP, 0);
+  Keybd_Event(VK_CONTROL, 1, KEYEVENTF_KEYUP, 0);
+end;
+
+class procedure Actions.PressControlV;
+begin
+  Keybd_Event(VK_CONTROL,   1, 0, 0);
+  Keybd_Event(VK_V,   1, 0, 0);
+  Keybd_Event(VK_V, 1, KEYEVENTF_KEYUP, 0);
+  Keybd_Event(VK_CONTROL, 1, KEYEVENTF_KEYUP, 0);
+end;
+
 class function Game.play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean;
 begin
   result := False;
@@ -209,6 +240,8 @@ begin
     result := True;
   end;
 end;
+
+
 
 end.
 

@@ -261,7 +261,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.10'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.11'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -843,6 +843,9 @@ begin
   Sender.AddFunction(@DoEraseFile, 'function EraseFile(Const FileName:String): Boolean;');
   Sender.AddFunction(@getClipboard, 'function getClipboard(): String');
   Sender.AddFunction(@setClipboard, 'procedure setClipboard(txt: String);');
+  Sender.AddFunction(@Actions.PressControlA, 'procedure PressControlA;');
+  Sender.AddFunction(@Actions.PressControlC, 'procedure PressControlC;');
+  Sender.AddFunction(@Actions.PressControlV, 'procedure PressControlV;');
 
 
 end;
@@ -995,8 +998,9 @@ begin
   if index = 19 then LabeledEdit1.Text := 'getMousePosY();';
   if index = 20 then LabeledEdit1.Text := 'getClipboard();';
   if index = 21 then LabeledEdit1.Text := 'setClipboard(''content'');';
-                                         
-
+  if index = 22 then LabeledEdit1.Text := 'PressControlA;';
+  if index = 23 then LabeledEdit1.Text := 'PressControlC;';
+  if index = 24 then LabeledEdit1.Text := 'PressControlV;';
 
 
 

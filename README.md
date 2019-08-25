@@ -48,6 +48,13 @@ begin
   Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;'); 
 end;
 ```
+## Debug error
+You may see this message when opening the project. 
+![](Images/Error_tpsscript.png)
+
+To resolve this is isse, simply open unit1 in graphical mode. A message to resolve this issue will appear. 
+![](Images/Solution_tpsscript.png)
+
 ## Changes
 
 ### v 0.2
@@ -114,5 +121,12 @@ New functions are added
   function EraseFile(Const FileName:String): Boolean;
   function getClipboard: String;
   procedure setClipboard(txt: String);
+```
+### v 0.11
+New functions are added
+```
+  procedure PressControlA;
+  procedure PressControlC;
+  procedure PressControlV;   
 ```
 
