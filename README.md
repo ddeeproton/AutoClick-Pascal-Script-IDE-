@@ -49,10 +49,12 @@ begin
 end;
 ```
 ## Debug error
-You may see this message when opening the project. 
+You may see this message when opening the project. ("TPSSCript" is not found).
+
 ![](Images/Error_tpsscript.png)
 
-To resolve this is isse, simply open unit1 in graphical mode. A message to resolve this issue will appear. 
+To resolve this is issue, open unit1.pas in graphical mode. And a message to resolve this issue will appear. 
+
 ![](Images/Solution_tpsscript.png)
 
 ## Changes
