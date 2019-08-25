@@ -49,7 +49,7 @@ begin
 end;
 ```
 ## Debug error
-You may see this message when opening the project. ("TPSSCript" is not found).
+You may see this message when opening the project. ("TPSScript" is not found).
 
 ![](Images/Error_tpsscript.png)
 
