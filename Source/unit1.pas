@@ -935,11 +935,14 @@ begin
   result := serverRecieve;
 end;
 
-
-
 function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;
 begin
   result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+EncodeStringBase64(Message));
+end;
+
+function HTTPGet(ip: String; Port: Integer; Message: String):String;
+begin
+  result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+Message);
 end;
 
 
@@ -1012,7 +1015,7 @@ begin
   Sender.AddFunction(@HTTPServerStop, 'procedure HTTPServerStop;');
   Sender.AddFunction(@HTTPServerMessage, 'function HTTPServerMessage:String;');
   Sender.AddFunction(@HttpClientMessage, 'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;');
-
+  Sender.AddFunction(@HTTPGet, 'function HTTPGet(ip: String; Port: Integer; Message: String):String;');
 
 end;
 
@@ -1174,14 +1177,15 @@ begin
   if index = 24 then LabeledEdit1.Text := 'PressControlV;';
   if index = 25 then LabeledEdit1.Text := 'LocalhostClientMessage(''ServerName'', ''message'');';
   if index = 26 then LabeledEdit1.Text := 'LocalhostServerStart(''ServerName'');';   
-  if index = 27 then LabeledEdit1.Text := 'LocalhostServerStop;';
-  if index = 28 then LabeledEdit1.Text := 'LocalhostServerStatus;';
-  if index = 29 then LabeledEdit1.Text := 'LocalhostServerMessage;';
-  if index = 30 then LabeledEdit1.Text := 'LocalhostServerMessageWait;';
+  if index = 27 then LabeledEdit1.Text := 'LocalhostServerStop();';
+  if index = 28 then LabeledEdit1.Text := 'LocalhostServerStatus();';
+  if index = 29 then LabeledEdit1.Text := 'LocalhostServerMessage();';
+  if index = 30 then LabeledEdit1.Text := 'LocalhostServerMessageWait();';
   if index = 31 then LabeledEdit1.Text := 'HTTPServerStart(''127.0.0.1'', 88, ''MyScript.pss'');';
-  if index = 32 then LabeledEdit1.Text := 'HTTPServerStop;';
-  if index = 33 then LabeledEdit1.Text := 'HTTPServerMessage;';
-  if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'')';
+  if index = 32 then LabeledEdit1.Text := 'HTTPServerStop();';
+  if index = 33 then LabeledEdit1.Text := 'HTTPServerMessage();';
+  if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'');';
+  if index = 35 then LabeledEdit1.Text := 'HTTPGet(''127.0.0.1'', 80, ''page'')';
 
 
 
@@ -1219,7 +1223,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.15'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.16'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

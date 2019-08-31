@@ -661,6 +661,7 @@ object Form1: TForm1
             'procedure HTTPServerStop;'
             'function HTTPServerMessage:String;'
             'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String; '
+            'function HTTPGet(ip: String; Port: Integer; Message: String):String;'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
