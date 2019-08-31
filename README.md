@@ -51,9 +51,9 @@ function ServerMessageWait: String;
 ## Debug error
 You may see this message when opening the project. ("TPSScript" is not found).
 
-![](Images/Error_tpsscript.png)
+![](Images/Error_tpsscript.png) 
 
-To resolve this is issue, open unit1.pas in graphical mode. And press "Install these packages"
+To resolve this is issue, open unit1.pas in graphical mode (or Press F12). And press "Install these packages"
 
 ![](Images/Solution_tpsscript.png)
 
