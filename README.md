@@ -133,4 +133,14 @@ New functions are added
   procedure PressControlC;
   procedure PressControlV;   
 ```
+### v 0.12
+New functions are added
+```
+  function ClientMessage(ServerName, message: String):Boolean;
+  function ServerStart(ServerName:String):Boolean;
+  function ServerStop:Boolean;
+  function ServerStatus:Boolean;
+  function ServerMessage: String;
+  function ServerMessageWait: String;   
+```
 

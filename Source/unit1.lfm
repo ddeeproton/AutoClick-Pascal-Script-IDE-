@@ -650,6 +650,12 @@ object Form1: TForm1
             'procedure PressControlA;'
             'procedure PressControlC;'
             'procedure PressControlV;   '
+            'function ClientMessage(ServerName, message: String):Boolean;'
+            'function ServerStart(ServerName:String):Boolean;'
+            'function ServerStop:Boolean;'
+            'function ServerStatus:Boolean;'
+            'function ServerMessage: String;'
+            'function ServerMessageWait: String; '
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
@@ -3071,5 +3077,22 @@ object Form1: TForm1
       Caption = 'Exit'
       OnClick = MenuItem15Click
     end
+  end
+  object SimpleIPCServer1: TSimpleIPCServer
+    Active = False
+    ThreadTimeOut = 50
+    Global = True
+    OnMessage = SimpleIPCServer1Message
+    OnMessageQueued = SimpleIPCServer1MessageQueued
+    OnMessageError = SimpleIPCServer1MessageError
+    MaxQueue = 0
+    MaxAction = ipcmoaNone
+    left = 305
+    top = 246
+  end
+  object SimpleIPCClient1: TSimpleIPCClient
+    Active = False
+    left = 424
+    top = 249
   end
 end

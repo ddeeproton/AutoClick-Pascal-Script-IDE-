@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterPas, uPSComponent, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
-  Windows, uprocess, ufiles, UScreenManager, Clipbrd;
+  Windows, simpleipc, uprocess, ufiles, UScreenManager, Clipbrd;
 
 type
 
@@ -76,6 +76,8 @@ type
     PSScript1: TPSScript;
     SaveDialog1: TSaveDialog;
     ShellTreeView1: TShellTreeView;
+    SimpleIPCClient1: TSimpleIPCClient;
+    SimpleIPCServer1: TSimpleIPCServer;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
@@ -115,6 +117,9 @@ type
     procedure ShellTreeView1Changing(Sender: TObject; Node: TTreeNode;
       var AllowChange: Boolean);
     procedure ShellTreeView1Click(Sender: TObject);
+    procedure SimpleIPCServer1Message(Sender: TObject);
+    procedure SimpleIPCServer1MessageError(Sender: TObject; Msg: TIPCServerMsg);
+    procedure SimpleIPCServer1MessageQueued(Sender: TObject);
     procedure SynEdit1Change(Sender: TObject);
     procedure SynEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure TimerRecordTimer(Sender: TObject);
@@ -261,7 +266,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.11'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.12'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
@@ -809,6 +814,86 @@ begin
   Clipboard.AsText := txt;
 end;
 
+// ========== TCP Communication ==========
+
+var
+  ServerMessageData: String = '';
+  isNewServerMessage: Boolean = False;
+
+function ServerStatus:Boolean;
+begin
+  with Form1 do begin
+    result := SimpleIPCServer1.Active;
+    if SimpleIPCServer1.Active then
+      Memo2.Lines.Add('server ON')
+    else
+      Memo2.Lines.Add('server OFF');
+  end;
+end;
+
+function ServerStart(ServerName:String):Boolean;
+begin
+  with Form1 do begin
+    if SimpleIPCServer1.Active then Exit;
+    SimpleIPCServer1.ServerID:=ServerName;
+    SimpleIPCServer1.Active:= True;
+  end;
+  result := ServerStatus;
+end;
+
+function ServerStop:Boolean;
+begin
+  Form1.SimpleIPCServer1.Active:= False;
+  result := not ServerStatus;
+end;
+
+function ServerMessage: String;
+begin
+  result := ServerMessageData;
+end;
+
+function ServerMessageWait: String;
+begin
+  while not isNewServerMessage do Sleep(1000);
+  result := ServerMessage;
+  isNewServerMessage := False;
+end;
+
+procedure TForm1.SimpleIPCServer1Message(Sender: TObject);
+begin
+  ServerMessageData := SimpleIPCServer1.StringMessage;
+  isNewServerMessage := True;
+end;
+
+procedure TForm1.SimpleIPCServer1MessageError(Sender: TObject;
+  Msg: TIPCServerMsg);
+begin
+  Memo2.Lines.Add('Server1 Error:'+Msg.ToString);
+end;
+procedure TForm1.SimpleIPCServer1MessageQueued(Sender: TObject);
+begin
+  TSimpleIPCServer(Sender).ReadMessage;
+end;
+
+function ClientMessage(ServerName, message: String):Boolean;
+begin
+  with Form1 do
+  begin
+    SimpleIPCClient1.ServerID := ServerName;
+    result := SimpleIPCClient1.ServerRunning;
+    if not result then
+    begin
+      Memo2.Lines.Add('(client) can not connect');
+      exit;
+    end;
+    SimpleIPCClient1.Connect;
+    SimpleIPCClient1.SendStringMessage(String(message));
+    Memo2.Lines.Add('(client) Message sent');
+    SimpleIPCClient1.Disconnect;
+  end;
+end;
+// =================
+
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
 begin
   Sender.AddFunction(@SetNextScript, 'procedure SetNextScript(const s: string)');
@@ -846,6 +931,13 @@ begin
   Sender.AddFunction(@Actions.PressControlA, 'procedure PressControlA;');
   Sender.AddFunction(@Actions.PressControlC, 'procedure PressControlC;');
   Sender.AddFunction(@Actions.PressControlV, 'procedure PressControlV;');
+  Sender.AddFunction(@ClientMessage, 'function ClientMessage(ServerName, message: String):Boolean;');
+  Sender.AddFunction(@ServerStart, 'function ServerStart(ServerName:String):Boolean;');
+  Sender.AddFunction(@ServerStop, 'function ServerStop:Boolean;    ');
+  Sender.AddFunction(@ServerStatus, 'function ServerStatus:Boolean; ');
+  Sender.AddFunction(@ServerMessage, 'function ServerMessage: String;');
+  Sender.AddFunction(@ServerMessageWait, 'function ServerMessageWait: String; ');
+
 
 
 end;
@@ -1001,6 +1093,13 @@ begin
   if index = 22 then LabeledEdit1.Text := 'PressControlA;';
   if index = 23 then LabeledEdit1.Text := 'PressControlC;';
   if index = 24 then LabeledEdit1.Text := 'PressControlV;';
+  if index = 25 then LabeledEdit1.Text := 'ClientMessage(''ServerName'', ''message'');';
+  if index = 26 then LabeledEdit1.Text := 'ServerStart(''ServerName'');';   
+  if index = 27 then LabeledEdit1.Text := 'ServerStop;';
+  if index = 28 then LabeledEdit1.Text := 'ServerStatus;';
+  if index = 29 then LabeledEdit1.Text := 'ServerMessage;';
+  if index = 30 then LabeledEdit1.Text := 'ServerMessageWait;';
+
 
 
 
