@@ -57,7 +57,6 @@ To resolve this is issue, open unit1.pas in graphical mode. And press "Install t
 
 ![](Images/Solution_tpsscript.png)
 
-Click "install these packages"
 
 ## Changes
 
