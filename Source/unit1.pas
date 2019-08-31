@@ -264,11 +264,6 @@ begin
   BringToFront;
 end;
 
-procedure TForm1.MenuItemAboutClick(Sender: TObject);
-begin
-  ShowMessage('Version: 0.12'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
-end;
-
 
 procedure TForm1.MenuItemClearCacheClick(Sender: TObject);
 var i: Integer;
@@ -1132,6 +1127,12 @@ begin
   end;
 
   if (index >= 7) then Label5.Caption:='Copy the code';
+end;
+
+
+procedure TForm1.MenuItemAboutClick(Sender: TObject);
+begin
+  ShowMessage('Version: 0.12'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

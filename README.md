@@ -14,46 +14,46 @@
 ## Description
 If you know Pascal programming language, with AutoClick you can set automatic clicks on your Windows computer. Special functions for mouse and screen controling are added in this project. And a generator code is aviable to help coding Pascal Scripts. 
 
-## Librairy added in Unit1.pas 
+## Functions and Procedures you can use
 ```
-procedure TForm1.PSScript1Compile(Sender: TPSScript);
-begin
-  Sender.AddFunction(@SetNextScript, 'procedure SetNextScript(const s: string)');
-  Sender.AddFunction(@Log, 'procedure Log(const s: string)');
-  Sender.AddFunction(@DoSleep, 'procedure DoSleep(i: Integer)');
-  Sender.AddFunction(@RunScript, 'procedure RunScript(const f: String)');
-  Sender.AddFunction(@RunScriptAndContinue,'procedure RunScriptAndContinue(const f: String)');
-  Sender.AddMethod(Actions, @Actions.getColorHexPositionPix, 'function getColorHexPositionPix(x,y: Integer):String;');
-  Sender.AddMethod(Actions, @Actions.MouseClick, 'procedure MouseClick(x,y: Integer);');
-  Sender.AddMethod(Actions, @Actions.MouseMove, 'procedure MouseMove(x,y: Integer);');
-  Sender.AddMethod(Actions, @Actions.MouseDown, 'procedure MouseDown();');
-  Sender.AddMethod(Actions, @Actions.MouseUp, 'procedure MouseUp();');  
-  Sender.AddMethod(Actions, @Actions.IsControlKeyPressed, 'function IsControlKeyPressed(): Boolean;');
-  Sender.AddMethod(Actions, @Actions.IsKeyPressed, 'function IsKeyPressed(key:longint): Boolean;');
-  Sender.AddMethod(Actions, @Actions.waitColorHexPositionPix2, 'procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);');
-  Sender.AddMethod(Actions, @Actions.waitColorHexPositionPix, 'procedure waitColorHexPositionPix(x,y: Integer; hex:String);');
-  Sender.AddMethod(Actions, @Actions.waitNotColorHexPositionPix, 'procedure waitNotColorHexPositionPix(x,y: Integer; hex:String);');
-  Sender.AddMethod(Actions, @Actions.waitNotColorHexPositionPix2, 'procedure waitNotColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);');
-  Sender.AddMethod(Actions, @Actions.IsShiftlKeyPressed, 'function IsShiftlKeyPressed(): Boolean; ');
-  Sender.AddMethod(Game, @Game.play, 'function play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean');
-  Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string; wShowWin: Word)');
-  Sender.AddMethod(ProcessTask, @ProcessTask.ExecAndContinue, 'procedure ExecAndContinue(sExe, sFile: string)');
-  Sender.AddMethod(ProcessTask, @ProcessTask.KillTask, 'function KillTask(ExeFileName: string): Integer;');
-  Sender.AddMethod(ProcessTask, @ProcessTask.CloseProcessPID, 'procedure CloseProcessPID(pid: Integer)');  
-  Sender.AddMethod(ScreenManager, @ScreenManager.PrintScreen, 'function PrintScreen(filename: String): Boolean;');
-  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosX, 'function getMousePosX(): Integer;');
-  Sender.AddMethod(ScreenManager, @ScreenManager.getMousePosY, 'function getMousePosY(): Integer;');  
-  Sender.AddFunction(@ReadFromFile, 'function ReadFromFile(Filename: string):String;');
-  Sender.AddFunction(@WriteInFile, 'procedure WriteInFile(Filename, txt: string);');
-  Sender.AddFunction(@makeDir, 'function makeDir(path:string):Boolean;'); 
-end;
+function getColorHexPositionPix(x,y: Integer):String;
+procedure MouseClick(x,y: Integer);
+procedure waitColorHexPositionPix(x,y: Integer; hex:String);
+procedure waitColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
+procedure waitNotColorHexPositionPix(x,y: Integer; hex:String);
+procedure waitNotColorHexPositionPix2(x,y: Integer; hex:String; x2,y2: Integer; hex2:String);
+function play(x1,y1: Integer; c1:String; x2,y2: Integer; c2:String; x,y:Integer):Boolean;
+procedure ExecAndContinue(sExe, sFile: string)
+function KillTask(ExeFileName: string): Integer;
+function ReadFromFile(Filename: string):String;
+procedure WriteInFile(Filename, txt: string);
+function makeDir(path:string):Boolean;'); 
+procedure MouseMove(x,y: Integer);
+procedure MouseMoveRelative(x,y: Integer);
+procedure MouseDown();
+procedure MouseUp();
+function FileExists(Const FileName:String): Boolean;
+function EraseFile(Const FileName:String): Boolean;
+function getMousePosX(): Integer;
+function getMousePosY(): Integer;
+function getClipboard: String;   
+procedure setClipboard(txt: String);
+procedure PressControlA;
+procedure PressControlC;
+procedure PressControlV;   
+function ClientMessage(ServerName, message: String):Boolean;
+function ServerStart(ServerName:String):Boolean;
+function ServerStop:Boolean;
+function ServerStatus:Boolean;
+function ServerMessage: String;
+function ServerMessageWait: String; 
 ```
 ## Debug error
 You may see this message when opening the project. ("TPSScript" is not found).
 
 ![](Images/Error_tpsscript.png)
 
-To resolve this is issue, open unit1.pas in graphical mode. And a message to resolve this issue will appear. 
+To resolve this is issue, open unit1.pas in graphical mode. And press "Install these packages"
 
 ![](Images/Solution_tpsscript.png)
 
