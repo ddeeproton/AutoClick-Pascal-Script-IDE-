@@ -182,3 +182,14 @@ Add news functions
 function HTTPGet(ip: String; Port: Integer; Message: String):String; 
 ```
 Same than HTTPClientMessage but without base64 encoding (use this fonction to get web page)
+
+### v 0.17
+Remove functions
+```
+function HTTPGet(ip: String; Port: Integer; Message: String):String; 
+```
+Add news function
+```
+function HTTPClientGet(url: String):String; 
+```
+(use this fonction to get http web page)

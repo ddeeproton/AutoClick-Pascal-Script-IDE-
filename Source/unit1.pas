@@ -940,9 +940,10 @@ begin
   result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+EncodeStringBase64(Message));
 end;
 
-function HTTPGet(ip: String; Port: Integer; Message: String):String;
+function HTTPClientGet(url: String):String;
 begin
-  result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+Message);
+  result := Form1.IdHTTP1.Get(url);
+  //result := 'rezrez';
 end;
 
 
@@ -1015,7 +1016,7 @@ begin
   Sender.AddFunction(@HTTPServerStop, 'procedure HTTPServerStop;');
   Sender.AddFunction(@HTTPServerMessage, 'function HTTPServerMessage:String;');
   Sender.AddFunction(@HttpClientMessage, 'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;');
-  Sender.AddFunction(@HTTPGet, 'function HTTPGet(ip: String; Port: Integer; Message: String):String;');
+  Sender.AddFunction(@HTTPClientGet, 'function HTTPClientGet(url: String):String;');
 
 end;
 
@@ -1185,7 +1186,7 @@ begin
   if index = 32 then LabeledEdit1.Text := 'HTTPServerStop();';
   if index = 33 then LabeledEdit1.Text := 'HTTPServerMessage();';
   if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'');';
-  if index = 35 then LabeledEdit1.Text := 'HTTPGet(''127.0.0.1'', 80, ''page'')';
+  if index = 35 then LabeledEdit1.Text := 'HTTPClientGet(''http://www.awebsite.com'')';
 
 
 
@@ -1223,7 +1224,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.16'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.17'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
