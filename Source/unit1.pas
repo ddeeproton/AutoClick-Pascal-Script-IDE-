@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterPas, uPSComponent, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
-  Windows, simpleipc, uprocess, ufiles, UScreenManager, Clipbrd;
+  Windows, simpleipc, uprocess, ufiles, UScreenManager, Clipbrd, IdHTTP,
+  IdHTTPServer, IdCustomHTTPServer, IdContext;
 
 type
 
@@ -20,6 +21,8 @@ type
     ButtonCodeInsert: TButton;
     ButtonListenKeyboard: TButton;
     ComboBoxCode: TComboBox;
+    IdHTTP1: TIdHTTP;
+    IdHTTPServer1: TIdHTTPServer;
     Label5: TLabel;
     LabeledEdit1: TLabeledEdit;
     ListBox1: TListBox;
@@ -93,6 +96,8 @@ type
     procedure ButtonRunClick(Sender: TObject);
     procedure ComboBoxCodeSelect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure IdHTTPServer1CommandGet(AContext: TIdContext;
+      ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
     procedure MenuItem10Click(Sender: TObject);
     procedure MenuItem15Click(Sender: TObject);
     procedure MenuItem17Click(Sender: TObject);
@@ -114,6 +119,7 @@ type
     procedure MenuItemSaveClick(Sender: TObject);
     procedure MenuItemStopClick(Sender: TObject);
     procedure PSScript1Compile(Sender: TPSScript);
+    procedure ShellTreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure ShellTreeView1Changing(Sender: TObject; Node: TTreeNode;
       var AllowChange: Boolean);
     procedure ShellTreeView1Click(Sender: TObject);
@@ -154,6 +160,9 @@ type
     Data: TPSScript;
   end;
 
+
+  // ======================
+
 var
   Form1: TForm1;
   ProcessScripts: array of TProcessScripts;
@@ -162,6 +171,7 @@ var
   RunNextScript: string;
   CanEraseProcessScripts: Integer;
   CanRun: Boolean;
+
 implementation
 
 {$R *.lfm}
@@ -214,6 +224,8 @@ begin
   end;
 
 end;
+
+
 
 
 procedure TForm1.MenuItemFunctionGeneratorClick(Sender: TObject);
@@ -552,6 +564,8 @@ begin
 end;
 
 
+
+
 class procedure ProcessScript.RunScriptThread(f: string);
 var
   p: ThreadProcess;
@@ -809,7 +823,7 @@ begin
   Clipboard.AsText := txt;
 end;
 
-// ========== TCP Communication ==========
+// ========== Localhost Communication ==========
 
 var
   ServerMessageData: String = '';
@@ -889,7 +903,67 @@ begin
   TSimpleIPCServer(Sender).ReadMessage;
 end;
 
-// =================
+          
+// ========== HTTP Communication ==========
+var
+  serverRecieve, scriptFile: String;
+
+
+
+procedure HTTPServerStart(ipServ: String; portServ: Integer; scriptFileServ: String);
+begin
+  scriptFile := scriptFileServ;
+  with Form1 do
+  begin
+    with IdHTTPServer1.Bindings.Add do
+    begin
+      IP := ipServ;
+      Port := portServ;
+    end;
+    IdHTTPServer1.Active:=True;
+  end;
+
+end;
+
+procedure HTTPServerStop;
+begin
+  Form1.IdHTTPServer1.Active:=False;
+end;
+
+function HTTPServerMessage:String;
+begin
+  result := serverRecieve;
+end;
+
+
+
+function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;
+begin
+  result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+Message);
+end;
+
+
+procedure TForm1.IdHTTPServer1CommandGet(AContext: TIdContext;
+  ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
+begin
+  //ARequestInfo.RemoteIP
+  ServerRecieve := Copy(ARequestInfo.Document,2);
+
+
+  if FileExists(scriptFile) then
+  begin
+    CanRun := True;
+    RunScriptAndContinue(scriptFile);
+  end;
+
+
+  AResponseInfo.ResponseNo := 200;
+  AResponseInfo.ContentText := 'ok';
+  AResponseInfo.ContentType := 'text/plain';
+end;
+
+
+// ========== Pascal Script ==========
 
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
 begin
@@ -934,8 +1008,16 @@ begin
   Sender.AddFunction(@LocalhostServerStatus, 'function LocalhostServerStatus:Boolean; ');
   Sender.AddFunction(@LocalhostServerMessage, 'function LocalhostServerMessage: String;');
   Sender.AddFunction(@LocalhostServerMessageWait, 'function LocalhostServerMessageWait: String; ');
+  Sender.AddFunction(@HTTPServerStart, 'procedure HTTPServerStart(ipServ: String; portServ: Integer; scriptFileServ: String);');
+  Sender.AddFunction(@HTTPServerStop, 'procedure HTTPServerStop;');
+  Sender.AddFunction(@HTTPServerMessage, 'function HTTPServerMessage:String;');
+  Sender.AddFunction(@HttpClientMessage, 'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;');
 
 
+end;
+
+procedure TForm1.ShellTreeView1Change(Sender: TObject; Node: TTreeNode);
+begin
 
 end;
 
@@ -1096,7 +1178,10 @@ begin
   if index = 28 then LabeledEdit1.Text := 'LocalhostServerStatus;';
   if index = 29 then LabeledEdit1.Text := 'LocalhostServerMessage;';
   if index = 30 then LabeledEdit1.Text := 'LocalhostServerMessageWait;';
-
+  if index = 31 then LabeledEdit1.Text := 'HTTPServerStart(''127.0.0.1'', 88, ''MyScript.pss'');';
+  if index = 32 then LabeledEdit1.Text := 'HTTPServerStop;';
+  if index = 33 then LabeledEdit1.Text := 'HTTPServerMessage;';
+  if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'')';
 
 
 
@@ -1134,7 +1219,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.13'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.14'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

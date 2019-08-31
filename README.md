@@ -48,12 +48,14 @@ function LocalhostServerStatus:Boolean;
 function LocalhostServerMessage: String;
 function LocalhostServerMessageWait: String; 
 ```
-## Debug error
-You may see this message when opening the project. ("TPSScript" is not found).
+## Install librairy
+
+### TPSScript
 
 ![](Images/Error_tpsscript.png) -> ![](Images/Solution_tpsscript.png)
 
-To resolve this is issue, open unit1.pas in graphical mode (or Press F12). And press "Install these packages"
+Open "unit1.pas" and Press "F12". And click "Install these packages"
+
 
 ## Changes
 
@@ -149,3 +151,26 @@ function LocalhostServerStatus:Boolean;
 function LocalhostServerMessage: String;
 function LocalhostServerMessageWait: String; 
 ```
+### v 0.14
+Add news functions
+```
+procedure HTTPServerStart(ipServ: String; portServ: Integer; scriptFileServ: String);
+procedure HTTPServerStop;
+function HTTPServerMessage:String;
+function HTTPClientMessage(ip: String; Port: Integer; Message: String):String; 
+```
+How to use:
+
+ServerStart.pss
+```
+HTTPServerStart('127.0.0.1',88,'ServerMessage.pss');
+```
+ServerMessage.pss
+```
+Log(HTTPServerMessage); // Hello
+```
+ClientMessage.pss
+```
+HTTPClientMessage('127.0.0.1',88,'Hello');
+```
+

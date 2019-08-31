@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 259
+  Left = 162
   Height = 525
-  Top = 141
+  Top = 123
   Width = 817
   Caption = 'Pascal Script IDE v1.0'
   ClientHeight = 505
@@ -34,6 +34,7 @@ object Form1: TForm1
       RightClickSelect = True
       ShowRoot = False
       TabOrder = 0
+      OnChange = ShellTreeView1Change
       OnChanging = ShellTreeView1Changing
       OnClick = ShellTreeView1Click
       OnSelectionChanged = ShellTreeView1Click
@@ -656,6 +657,10 @@ object Form1: TForm1
             'function LocalhostServerStatus:Boolean;'
             'function LocalhostServerMessage: String;'
             'function LocalhostServerMessageWait: String; '
+            'procedure HTTPServerStart(ipServ: String; portServ: Integer; scriptFileServ: String);'
+            'procedure HTTPServerStop;'
+            'function HTTPServerMessage:String;'
+            'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String; '
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
@@ -3081,18 +3086,40 @@ object Form1: TForm1
   object SimpleIPCServer1: TSimpleIPCServer
     Active = False
     ThreadTimeOut = 50
-    Global = True
-    OnMessage = SimpleIPCServer1Message
-    OnMessageQueued = SimpleIPCServer1MessageQueued
-    OnMessageError = SimpleIPCServer1MessageError
+    Global = False
     MaxQueue = 0
     MaxAction = ipcmoaNone
-    left = 305
-    top = 246
+    left = 304
+    top = 248
   end
   object SimpleIPCClient1: TSimpleIPCClient
     Active = False
     left = 424
-    top = 249
+    top = 248
+  end
+  object IdHTTP1: TIdHTTP
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Date = 0
+    Request.Expires = 0
+    Request.LastModified = 0
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    left = 304
+    top = 200
+  end
+  object IdHTTPServer1: TIdHTTPServer
+    Bindings = <>
+    OnCommandGet = IdHTTPServer1CommandGet
+    left = 424
+    top = 200
   end
 end
