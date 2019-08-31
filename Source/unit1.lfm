@@ -650,12 +650,12 @@ object Form1: TForm1
             'procedure PressControlA;'
             'procedure PressControlC;'
             'procedure PressControlV;   '
-            'function ClientMessage(ServerName, message: String):Boolean;'
-            'function ServerStart(ServerName:String):Boolean;'
-            'function ServerStop:Boolean;'
-            'function ServerStatus:Boolean;'
-            'function ServerMessage: String;'
-            'function ServerMessageWait: String; '
+            'function LocalhostClientMessage(ServerName, message: String):Boolean;'
+            'function LocalhostServerStart(ServerName:String):Boolean;'
+            'function LocalhostServerStop:Boolean;'
+            'function LocalhostServerStatus:Boolean;'
+            'function LocalhostServerMessage: String;'
+            'function LocalhostServerMessageWait: String; '
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList

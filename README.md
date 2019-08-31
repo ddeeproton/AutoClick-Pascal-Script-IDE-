@@ -41,12 +41,12 @@ procedure setClipboard(txt: String);
 procedure PressControlA;
 procedure PressControlC;
 procedure PressControlV;   
-function ClientMessage(ServerName, message: String):Boolean;
-function ServerStart(ServerName:String):Boolean;
-function ServerStop:Boolean;
-function ServerStatus:Boolean;
-function ServerMessage: String;
-function ServerMessageWait: String; 
+function LocalhostClientMessage(ServerName, message: String):Boolean;
+function LocalhostServerStart(ServerName:String):Boolean;
+function LocalhostServerStop:Boolean;
+function LocalhostServerStatus:Boolean;
+function LocalhostServerMessage: String;
+function LocalhostServerMessageWait: String; 
 ```
 ## Debug error
 You may see this message when opening the project. ("TPSScript" is not found).
@@ -142,4 +142,13 @@ New functions are added
   function ServerMessage: String;
   function ServerMessageWait: String;   
 ```
-
+### v 0.13
+Rename functions into
+```
+function LocalhostClientMessage(ServerName, message: String):Boolean;
+function LocalhostServerStart(ServerName:String):Boolean;
+function LocalhostServerStop:Boolean;
+function LocalhostServerStatus:Boolean;
+function LocalhostServerMessage: String;
+function LocalhostServerMessageWait: String; 
+```

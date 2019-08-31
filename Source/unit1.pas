@@ -815,7 +815,26 @@ var
   ServerMessageData: String = '';
   isNewServerMessage: Boolean = False;
 
-function ServerStatus:Boolean;
+
+function LocalhostClientMessage(ServerName, message: String):Boolean;
+begin
+  with Form1 do
+  begin
+    SimpleIPCClient1.ServerID := ServerName;
+    result := SimpleIPCClient1.ServerRunning;
+    if not result then
+    begin
+      Memo2.Lines.Add('(client) can not connect');
+      exit;
+    end;
+    SimpleIPCClient1.Connect;
+    SimpleIPCClient1.SendStringMessage(String(message));
+    Memo2.Lines.Add('(client) Message sent');
+    SimpleIPCClient1.Disconnect;
+  end;
+end;
+
+function LocalhostServerStatus:Boolean;
 begin
   with Form1 do begin
     result := SimpleIPCServer1.Active;
@@ -826,31 +845,31 @@ begin
   end;
 end;
 
-function ServerStart(ServerName:String):Boolean;
+function LocalhostServerStart(ServerName:String):Boolean;
 begin
   with Form1 do begin
     if SimpleIPCServer1.Active then Exit;
     SimpleIPCServer1.ServerID:=ServerName;
     SimpleIPCServer1.Active:= True;
   end;
-  result := ServerStatus;
+  result := LocalhostServerStatus;
 end;
 
-function ServerStop:Boolean;
+function LocalhostServerStop:Boolean;
 begin
   Form1.SimpleIPCServer1.Active:= False;
-  result := not ServerStatus;
+  result := not LocalhostServerStatus;
 end;
 
-function ServerMessage: String;
+function LocalhostServerMessage: String;
 begin
   result := ServerMessageData;
 end;
 
-function ServerMessageWait: String;
+function LocalhostServerMessageWait: String;
 begin
   while not isNewServerMessage do Sleep(1000);
-  result := ServerMessage;
+  result := LocalhostServerMessage;
   isNewServerMessage := False;
 end;
 
@@ -870,23 +889,6 @@ begin
   TSimpleIPCServer(Sender).ReadMessage;
 end;
 
-function ClientMessage(ServerName, message: String):Boolean;
-begin
-  with Form1 do
-  begin
-    SimpleIPCClient1.ServerID := ServerName;
-    result := SimpleIPCClient1.ServerRunning;
-    if not result then
-    begin
-      Memo2.Lines.Add('(client) can not connect');
-      exit;
-    end;
-    SimpleIPCClient1.Connect;
-    SimpleIPCClient1.SendStringMessage(String(message));
-    Memo2.Lines.Add('(client) Message sent');
-    SimpleIPCClient1.Disconnect;
-  end;
-end;
 // =================
 
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
@@ -926,12 +928,12 @@ begin
   Sender.AddFunction(@Actions.PressControlA, 'procedure PressControlA;');
   Sender.AddFunction(@Actions.PressControlC, 'procedure PressControlC;');
   Sender.AddFunction(@Actions.PressControlV, 'procedure PressControlV;');
-  Sender.AddFunction(@ClientMessage, 'function ClientMessage(ServerName, message: String):Boolean;');
-  Sender.AddFunction(@ServerStart, 'function ServerStart(ServerName:String):Boolean;');
-  Sender.AddFunction(@ServerStop, 'function ServerStop:Boolean;    ');
-  Sender.AddFunction(@ServerStatus, 'function ServerStatus:Boolean; ');
-  Sender.AddFunction(@ServerMessage, 'function ServerMessage: String;');
-  Sender.AddFunction(@ServerMessageWait, 'function ServerMessageWait: String; ');
+  Sender.AddFunction(@LocalhostClientMessage, 'function LocalhostClientMessage(ServerName, message: String):Boolean;');
+  Sender.AddFunction(@LocalhostServerStart, 'function LocalhostServerStart(ServerName:String):Boolean;');
+  Sender.AddFunction(@LocalhostServerStop, 'function LocalhostServerStop:Boolean;    ');
+  Sender.AddFunction(@LocalhostServerStatus, 'function LocalhostServerStatus:Boolean; ');
+  Sender.AddFunction(@LocalhostServerMessage, 'function LocalhostServerMessage: String;');
+  Sender.AddFunction(@LocalhostServerMessageWait, 'function LocalhostServerMessageWait: String; ');
 
 
 
@@ -1088,12 +1090,12 @@ begin
   if index = 22 then LabeledEdit1.Text := 'PressControlA;';
   if index = 23 then LabeledEdit1.Text := 'PressControlC;';
   if index = 24 then LabeledEdit1.Text := 'PressControlV;';
-  if index = 25 then LabeledEdit1.Text := 'ClientMessage(''ServerName'', ''message'');';
-  if index = 26 then LabeledEdit1.Text := 'ServerStart(''ServerName'');';   
-  if index = 27 then LabeledEdit1.Text := 'ServerStop;';
-  if index = 28 then LabeledEdit1.Text := 'ServerStatus;';
-  if index = 29 then LabeledEdit1.Text := 'ServerMessage;';
-  if index = 30 then LabeledEdit1.Text := 'ServerMessageWait;';
+  if index = 25 then LabeledEdit1.Text := 'LocalhostClientMessage(''ServerName'', ''message'');';
+  if index = 26 then LabeledEdit1.Text := 'LocalhostServerStart(''ServerName'');';   
+  if index = 27 then LabeledEdit1.Text := 'LocalhostServerStop;';
+  if index = 28 then LabeledEdit1.Text := 'LocalhostServerStatus;';
+  if index = 29 then LabeledEdit1.Text := 'LocalhostServerMessage;';
+  if index = 30 then LabeledEdit1.Text := 'LocalhostServerMessageWait;';
 
 
 
@@ -1132,7 +1134,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.12'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.13'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
