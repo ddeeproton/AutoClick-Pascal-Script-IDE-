@@ -173,4 +173,5 @@ ClientMessage.pss
 ```
 HTTPClientMessage('127.0.0.1',88,'Hello');
 ```
-
+### v 0.15 
+HTTPServer and HTTPClient talk now in base64 to allow multiples lines in message

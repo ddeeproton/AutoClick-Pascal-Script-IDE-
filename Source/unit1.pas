@@ -9,7 +9,7 @@ uses
   Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls, ShellCtrls,
   Spin, uPSRuntime, uPSComponent_Default, umousekeyboard, uPSCompiler, uPSUtils,
   Windows, simpleipc, uprocess, ufiles, UScreenManager, Clipbrd, IdHTTP,
-  IdHTTPServer, IdCustomHTTPServer, IdContext;
+  IdHTTPServer, IdCustomHTTPServer, IdContext, base64;
 
 type
 
@@ -939,7 +939,7 @@ end;
 
 function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;
 begin
-  result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+Message);
+  result := Form1.IdHTTP1.Get('http://'+ip+':'+IntTosTr(port)+'/'+EncodeStringBase64(Message));
 end;
 
 
@@ -948,7 +948,7 @@ procedure TForm1.IdHTTPServer1CommandGet(AContext: TIdContext;
 begin
   //ARequestInfo.RemoteIP
   ServerRecieve := Copy(ARequestInfo.Document,2);
-
+  ServerRecieve := DecodeStringBase64(ServerRecieve);
 
   if FileExists(scriptFile) then
   begin
@@ -1219,7 +1219,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.14'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.15'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
