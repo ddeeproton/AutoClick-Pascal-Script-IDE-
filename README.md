@@ -47,6 +47,11 @@ function LocalhostServerStop:Boolean;
 function LocalhostServerStatus:Boolean;
 function LocalhostServerMessage: String;
 function LocalhostServerMessageWait: String; 
+procedure HTTPServerStart(ipServ: String; portServ: Integer; scriptFileServ: String);
+procedure HTTPServerStop;
+function HTTPServerMessage:String;
+function HTTPClientMessage(ip: String; Port: Integer; Message: String):String; 
+function HTTPClientGet(url: String):String; 
 ```
 ## Install librairy
 
