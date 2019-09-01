@@ -204,3 +204,8 @@ Add news function
 ```
 function WGet(url, destination: String; timeout: Integer):String; // require "wget.exe" in directory "addons"
 ```
+### v 0.19
+Bug fix with function
+```
+function WGet(url, destination: String; timeout: Integer):String; // require "wget.exe" in directory "addons"
+```

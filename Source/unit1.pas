@@ -982,32 +982,47 @@ begin
   wgetExe := ExtractFileDir(Application.ExeName) + '\addons\wget.exe';
   destination := ExtractFileDir(Application.ExeName) + '\data\'+destination;
   if FileExists(destination) then DeleteThisFile(destination);
+  if FileExists(wgetExe+'.done') then DeleteThisFile(wgetExe+'.done');
+  if FileExists(wgetExe+'.bat') then DeleteThisFile(wgetExe+'.bat');
   if FileExists(destination) then
   begin
     Form1.Memo2.Lines.Add('Cannot erase destination file "'+destination+'"');
     Exit;
   end;
-  WriteInFile(wgetExe+'.bat', '"'+wgetExe+'" -O "'+destination+'" "'+url+'" --no-check-certificate');
-  if not FileExists(wgetExe+'.bat') then
+  if FileExists(wgetExe+'.done') then
   begin
-    Form1.Memo2.Lines.Add('Error: "wget.exe.bat" not found in directory "'+wgetExe+'"');
+    Form1.Memo2.Lines.Add('Cannot erase ondone file "'+wgetExe+'.done"');
     Exit;
   end;
+  if FileExists(wgetExe+'.bat') then
+  begin
+    Form1.Memo2.Lines.Add('Cannot erase bat file "'+wgetExe+'.bat"');
+    Exit;
+  end;
+  WriteInFile(wgetExe+'.bat',
+    '"'+wgetExe+'" -O "'+destination+'" "'+url+'" --no-check-certificate'+#13#10+   
+    'echo yes > "'+ wgetExe+'.done"'
+  );
   if not FileExists(wgetExe) then
   begin
     Form1.Memo2.Lines.Add('Error: "wget.exe" not found in directory "'+wgetExe+'"');
     Exit;
   end;
   Form1.Memo2.Lines.Add(wgetExe+'.bat');
-  Form1.Memo2.Lines.Add(ReadFromFile(wgetExe+'.bat'));
-  ProcessTask.ExecAndContinue(wgetExe+'.bat', ' ');
-  while (timeout > 0) and not FileExists(destination) do
+  //Form1.Memo2.Lines.Add(ReadFromFile(wgetExe+'.bat')); 
+  Form1.Memo2.Lines.Add('Start "'+wgetExe+'.bat"');
+  ProcessTask.ExecAndWait(wgetExe+'.bat', ' ');
+
+  while not FileExists(wgetExe+'.done') do
   begin
     Sleep(100);
-    timeout := timeout - 100;
   end;
-  Sleep(200);
+  Form1.Memo2.Lines.Add('Stop "'+wgetExe+'"');
+  //ProcessTask.ExecAndWait('"'+wgetExe+'"', ' -O "'+destination+'" "'+url+'" --no-check-certificate');
+
+  //Sleep(5000);
   result := ReadFromFile(destination);
+
 end;
 
 // ========== Pascal Script ==========
@@ -1269,7 +1284,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.18'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.19'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

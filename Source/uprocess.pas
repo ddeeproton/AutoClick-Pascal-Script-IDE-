@@ -13,11 +13,30 @@ type
     class procedure ExecAndContinue(sExe, sFile: string);
     class function KillTask(ExeFileName: string): Integer;
     class procedure CloseProcessPID(pid: Integer);
+    class procedure ExecAndWait(sExe, sFile: string);
+    class procedure ExecAndWait(sExe, sFile: string; wShowWin: Word);
   end;
 
   function IsUserAnAdmin(): Boolean; external shell32;
 
 implementation
+                                                                   
+class procedure ProcessTask.ExecAndWait(sExe, sFile: string);
+begin
+  ProcessTask.ExecAndWait(sExe, sFile, SW_SHOW);
+end;
+
+class procedure ProcessTask.ExecAndWait(sExe, sFile: string; wShowWin: Word);
+var
+  h: Cardinal;
+  operation: PChar;
+begin
+  if IsUserAnAdmin() then operation := 'open' else operation := 'runas';
+  h := 0;
+  ShellExecute(h, operation, PChar(sExe), PChar(sFile), nil,wShowWin);
+  WaitForSingleObject(h, INFINITE);
+end;
+
 
 
 class procedure ProcessTask.ExecAndContinue(sExe, sFile: string; wShowWin: Word);
