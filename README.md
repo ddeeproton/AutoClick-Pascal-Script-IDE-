@@ -195,6 +195,12 @@ function HTTPGet(ip: String; Port: Integer; Message: String):String;
 ```
 Add news function
 ```
-function HTTPClientGet(url: String):String; 
+function HTTPClientGet(url: String):String; // can make crash your script if page is not downloaded
 ```
 (use this fonction to get http web page)
+
+### v 0.18
+Add news function
+```
+function WGet(url, destination: String; timeout: Integer):String; // require "wget.exe" in directory "addons"
+```

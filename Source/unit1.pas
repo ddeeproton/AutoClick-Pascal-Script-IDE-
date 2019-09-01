@@ -941,10 +941,17 @@ begin
 end;
 
 function HTTPClientGet(url: String):String;
+var str: String;
 begin
-  result := Form1.IdHTTP1.Get(url);
-  //result := 'rezrez';
+  result := '';
+  str := '';
+  try
+    str := Form1.IdHTTP1.Get(url);
+  finally
+  end;
+  if str <> '' then result := str;
 end;
+
 
 
 procedure TForm1.IdHTTPServer1CommandGet(AContext: TIdContext;
@@ -966,6 +973,42 @@ begin
   AResponseInfo.ContentType := 'text/plain';
 end;
 
+// ========== WGet ==========
+
+function WGet(url, destination: String; timeout: Integer):String;
+var wgetExe: String;
+begin
+  result := '';
+  wgetExe := ExtractFileDir(Application.ExeName) + '\addons\wget.exe';
+  destination := ExtractFileDir(Application.ExeName) + '\data\'+destination;
+  if FileExists(destination) then DeleteThisFile(destination);
+  if FileExists(destination) then
+  begin
+    Form1.Memo2.Lines.Add('Cannot erase destination file "'+destination+'"');
+    Exit;
+  end;
+  WriteInFile(wgetExe+'.bat', '"'+wgetExe+'" -O "'+destination+'" "'+url+'" --no-check-certificate');
+  if not FileExists(wgetExe+'.bat') then
+  begin
+    Form1.Memo2.Lines.Add('Error: "wget.exe.bat" not found in directory "'+wgetExe+'"');
+    Exit;
+  end;
+  if not FileExists(wgetExe) then
+  begin
+    Form1.Memo2.Lines.Add('Error: "wget.exe" not found in directory "'+wgetExe+'"');
+    Exit;
+  end;
+  Form1.Memo2.Lines.Add(wgetExe+'.bat');
+  Form1.Memo2.Lines.Add(ReadFromFile(wgetExe+'.bat'));
+  ProcessTask.ExecAndContinue(wgetExe+'.bat', ' ');
+  while (timeout > 0) and not FileExists(destination) do
+  begin
+    Sleep(100);
+    timeout := timeout - 100;
+  end;
+  Sleep(200);
+  result := ReadFromFile(destination);
+end;
 
 // ========== Pascal Script ==========
 
@@ -1017,6 +1060,7 @@ begin
   Sender.AddFunction(@HTTPServerMessage, 'function HTTPServerMessage:String;');
   Sender.AddFunction(@HttpClientMessage, 'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;');
   Sender.AddFunction(@HTTPClientGet, 'function HTTPClientGet(url: String):String;');
+  Sender.AddFunction(@WGet, 'function WGet(url, destination: String; timeout: Integer):String;');
 
 end;
 
@@ -1186,7 +1230,8 @@ begin
   if index = 32 then LabeledEdit1.Text := 'HTTPServerStop();';
   if index = 33 then LabeledEdit1.Text := 'HTTPServerMessage();';
   if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'');';
-  if index = 35 then LabeledEdit1.Text := 'HTTPClientGet(''http://www.awebsite.com'')';
+  if index = 35 then LabeledEdit1.Text := 'HTTPClientGet(''http://www.awebsite.com'');';
+  if index = 36 then LabeledEdit1.Text := 'WGet(''http://www.awebsite.com'',''data\webContent.pss'', 5000);';
 
 
 
@@ -1224,7 +1269,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.17'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.18'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

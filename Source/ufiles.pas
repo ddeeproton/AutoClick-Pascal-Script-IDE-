@@ -10,9 +10,15 @@ uses
   function ReadFromFile(Filename: string):String;
   procedure WriteInFile(Filename, txt: string);
   function makeDir(path:string):Boolean;
+  procedure DeleteThisFile(Filename: string);
 
 implementation
 
+procedure DeleteThisFile(Filename: string);
+begin
+  if not FileExists(Filename) then Exit;
+  DeleteFile(PChar(Filename));
+end;
 
 function ReadFromFile(Filename: string):String;
 var
