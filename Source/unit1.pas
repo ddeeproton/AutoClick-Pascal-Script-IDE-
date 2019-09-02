@@ -953,7 +953,6 @@ begin
 end;
 
 
-
 procedure TForm1.IdHTTPServer1CommandGet(AContext: TIdContext;
   ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
 begin
@@ -1025,6 +1024,18 @@ begin
 
 end;
 
+function EncodeB64(str:String):String;
+begin
+  result := EncodeStringBase64(str);
+end;
+
+function DecodeB64(str:String):String;
+begin
+  result := DecodeStringBase64(str);
+end;
+
+
+
 // ========== Pascal Script ==========
 
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
@@ -1076,6 +1087,11 @@ begin
   Sender.AddFunction(@HttpClientMessage, 'function HTTPClientMessage(ip: String; Port: Integer; Message: String):String;');
   Sender.AddFunction(@HTTPClientGet, 'function HTTPClientGet(url: String):String;');
   Sender.AddFunction(@WGet, 'function WGet(url, destination: String; timeout: Integer):String;');
+  Sender.AddFunction(@DecodeB64, 'function DecodeB64(str:String):String;');
+  Sender.AddFunction(@EncodeB64, 'function EncodeB64(str:String):String;');
+
+
+
 
 end;
 
@@ -1284,7 +1300,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.19'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.20'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

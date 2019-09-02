@@ -182,7 +182,7 @@ HTTPClientMessage('127.0.0.1',88,'Hello');
 HTTPServer and HTTPClient talk now in base64 to allow multiples lines in message
 
 ### v 0.16 
-Add news functions
+Add new functions
 ```
 function HTTPGet(ip: String; Port: Integer; Message: String):String; 
 ```
@@ -193,14 +193,14 @@ Remove functions
 ```
 function HTTPGet(ip: String; Port: Integer; Message: String):String; 
 ```
-Add news function
+Add new function
 ```
 function HTTPClientGet(url: String):String; // can make crash your script if page is not downloaded
 ```
 (use this fonction to get http web page)
 
 ### v 0.18
-Add news function
+Add new function
 ```
 function WGet(url, destination: String; timeout: Integer):String; // require "wget.exe" in directory "addons"
 ```
@@ -208,4 +208,10 @@ function WGet(url, destination: String; timeout: Integer):String; // require "wg
 Bug fix with function
 ```
 function WGet(url, destination: String; timeout: Integer):String; // require "wget.exe" in directory "addons"
+```
+### v 0.19
+Add new function
+```
+function DecodeB64(str:String):String;
+function EncodeB64(str:String):String;
 ```
