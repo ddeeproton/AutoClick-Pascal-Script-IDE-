@@ -215,3 +215,8 @@ Add new function
 function DecodeB64(str:String):String;
 function EncodeB64(str:String):String;
 ```
+### v 0.20
+Add new function
+```
+function Replace(content, old, new: String):String;
+```

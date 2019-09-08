@@ -191,7 +191,7 @@ begin
 
 
 
-  SynEdit1.Clear;   
+  SynEdit1.Clear;
   SynEdit1.Enabled := False;
   Memo2.Clear;
   RunNextScript:= '';
@@ -1034,7 +1034,10 @@ begin
   result := DecodeStringBase64(str);
 end;
 
-
+function Replace(content, old, new: String):String;
+begin
+  result := content.Replace(old, new);
+end;
 
 // ========== Pascal Script ==========
 
@@ -1089,6 +1092,7 @@ begin
   Sender.AddFunction(@WGet, 'function WGet(url, destination: String; timeout: Integer):String;');
   Sender.AddFunction(@DecodeB64, 'function DecodeB64(str:String):String;');
   Sender.AddFunction(@EncodeB64, 'function EncodeB64(str:String):String;');
+  Sender.AddFunction(@Replace, 'function Replace(content, old, new: String):String;');
 
 
 
@@ -1263,6 +1267,7 @@ begin
   if index = 34 then LabeledEdit1.Text := 'HTTPClientMessage(''127.0.0.1'', 88, ''Message'');';
   if index = 35 then LabeledEdit1.Text := 'HTTPClientGet(''http://www.awebsite.com'');';
   if index = 36 then LabeledEdit1.Text := 'WGet(''http://www.awebsite.com'',''data\webContent.pss'', 5000);';
+  if index = 37 then LabeledEdit1.Text := 'Replace(''content'', ''old'', ''new'');';
 
 
 
