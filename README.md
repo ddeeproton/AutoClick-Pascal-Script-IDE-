@@ -77,14 +77,6 @@ Like this (Batch script):
 ```
 AutoClick_PascalScriptIDE.exe "myscript.pss" 
 ```
-You can also copy "AutoClick_PascalScriptIDE.exe" into a new name, and manage it from PascalScript code:
-
-Like this (Pascal Script):
-```
-ExecAndContinue('AutoClick_PascalScriptIDE_2.exe','MyScriptToStart.pss /');
-
-KillTask('AutoClick_PascalScriptIDE_2.exe'); 
-```
 
 ### v 0.3
 New functions are added:
@@ -225,4 +217,9 @@ function EncodeB64(str:String):String;
 Add new function
 ```
 function Replace(content, old, new: String):String;
+```
+### v 0.21
+Bug fix 
+```
+Command line Start - The last parameter was not read
 ```
