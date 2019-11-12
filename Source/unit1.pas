@@ -213,7 +213,7 @@ begin
 
   if ParamCount > 0 then
   begin
-    for i := 0 to ParamCount - 1 do
+    for i := 0 to ParamCount do
     begin
       if FileExists(dataPath+'\'+ParamStr(i)) and ParamStr(i).EndsWith('.pss') then
       begin

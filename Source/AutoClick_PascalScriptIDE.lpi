@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item6>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="6">
       <Unit0>
         <Filename Value="AutoClick_PascalScriptIDE.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -71,15 +71,10 @@
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="filesmanager.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="FilesManager"/>
-      </Unit5>
-      <Unit6>
         <Filename Value="uscreenmanager.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UScreenManager"/>
-      </Unit6>
+      </Unit5>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

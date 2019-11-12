@@ -55,12 +55,18 @@ function HTTPClientGet(url: String):String;
 ```
 ## Install librairy
 
-### TPSScript
+-Indy 10
+-laz_synapse
 
+### How to install librairies - Solution 1
 ![](Images/Error_tpsscript.png) -> ![](Images/Solution_tpsscript.png)
 
 Open "unit1.pas" and Press "F12". And click "Install these packages"
 
+### Solution 2
+
+-Go to menu "Package" and "online package manager".
+-Search and install theses packages: "Indy 10" and "Synapse" 
 
 ## Changes
 
