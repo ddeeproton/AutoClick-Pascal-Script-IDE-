@@ -223,3 +223,10 @@ Bug fix
 ```
 Command line Start - The last parameter was not read
 ```
+### v 0.22
+Bug fix 
+Add new function
+```
+procedure DoHide;
+procedure DoShow;
+```

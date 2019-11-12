@@ -1039,6 +1039,15 @@ begin
   result := content.Replace(old, new);
 end;
 
+procedure DoHide1;
+begin
+  form1.Hide;
+end;
+procedure DoShow1;
+begin
+  form1.show;
+end;
+
 // ========== Pascal Script ==========
 
 procedure TForm1.PSScript1Compile(Sender: TPSScript);
@@ -1093,6 +1102,8 @@ begin
   Sender.AddFunction(@DecodeB64, 'function DecodeB64(str:String):String;');
   Sender.AddFunction(@EncodeB64, 'function EncodeB64(str:String):String;');
   Sender.AddFunction(@Replace, 'function Replace(content, old, new: String):String;');
+  Sender.AddFunction(@DoHide1, 'procedure DoHide');
+  Sender.AddFunction(@DoShow1, 'procedure DoShow');
 
 
 
@@ -1305,7 +1316,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.20'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.22'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
