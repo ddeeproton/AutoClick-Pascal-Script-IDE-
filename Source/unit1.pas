@@ -774,7 +774,8 @@ end;
 
 procedure Log(const s: string);
 begin
-  Form1.Memo2.Lines.add(s);
+  Form1.AddLog(s);
+  //Form1.Memo2.Lines.add(s);
 end;
 
 
@@ -838,12 +839,12 @@ begin
     result := SimpleIPCClient1.ServerRunning;
     if not result then
     begin
-      Memo2.Lines.Add('(client) can not connect');
+      AddLog('(client) can not connect');
       exit;
     end;
     SimpleIPCClient1.Connect;
     SimpleIPCClient1.SendStringMessage(String(message));
-    Memo2.Lines.Add('(client) Message sent');
+    AddLog('(client) Message sent');
     SimpleIPCClient1.Disconnect;
   end;
 end;
@@ -853,9 +854,9 @@ begin
   with Form1 do begin
     result := SimpleIPCServer1.Active;
     if SimpleIPCServer1.Active then
-      Memo2.Lines.Add('server ON')
+      AddLog('server ON')
     else
-      Memo2.Lines.Add('server OFF');
+      AddLog('server OFF');
   end;
 end;
 
@@ -896,7 +897,7 @@ end;
 procedure TForm1.SimpleIPCServer1MessageError(Sender: TObject;
   Msg: TIPCServerMsg);
 begin
-  Memo2.Lines.Add('Server1 Error:'+Msg.ToString);
+  AddLog('Server1 Error:'+Msg.ToString);
 end;
 procedure TForm1.SimpleIPCServer1MessageQueued(Sender: TObject);
 begin
@@ -985,17 +986,17 @@ begin
   if FileExists(wgetExe+'.bat') then DeleteThisFile(wgetExe+'.bat');
   if FileExists(destination) then
   begin
-    Form1.Memo2.Lines.Add('Cannot erase destination file "'+destination+'"');
+    Form1.AddLog('Cannot erase destination file "'+destination+'"');
     Exit;
   end;
   if FileExists(wgetExe+'.done') then
   begin
-    Form1.Memo2.Lines.Add('Cannot erase ondone file "'+wgetExe+'.done"');
+    Form1.AddLog('Cannot erase ondone file "'+wgetExe+'.done"');
     Exit;
   end;
   if FileExists(wgetExe+'.bat') then
   begin
-    Form1.Memo2.Lines.Add('Cannot erase bat file "'+wgetExe+'.bat"');
+    Form1.AddLog('Cannot erase bat file "'+wgetExe+'.bat"');
     Exit;
   end;
   WriteInFile(wgetExe+'.bat',
@@ -1004,19 +1005,19 @@ begin
   );
   if not FileExists(wgetExe) then
   begin
-    Form1.Memo2.Lines.Add('Error: "wget.exe" not found in directory "'+wgetExe+'"');
+    Form1.AddLog('Error: "wget.exe" not found in directory "'+wgetExe+'"');
     Exit;
   end;
-  Form1.Memo2.Lines.Add(wgetExe+'.bat');
+  Form1.AddLog(wgetExe+'.bat');
   //Form1.Memo2.Lines.Add(ReadFromFile(wgetExe+'.bat')); 
-  Form1.Memo2.Lines.Add('Start "'+wgetExe+'.bat"');
+  Form1.AddLog('Start "'+wgetExe+'.bat"');
   ProcessTask.ExecAndWait(wgetExe+'.bat', ' ');
 
   while not FileExists(wgetExe+'.done') do
   begin
     Sleep(100);
   end;
-  Form1.Memo2.Lines.Add('Stop "'+wgetExe+'"');
+  Form1.AddLog('Stop "'+wgetExe+'"');
   //ProcessTask.ExecAndWait('"'+wgetExe+'"', ' -O "'+destination+'" "'+url+'" --no-check-certificate');
 
   //Sleep(5000);
@@ -1316,7 +1317,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.22'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.23'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 

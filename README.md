@@ -230,3 +230,5 @@ Add new function
 procedure DoHide;
 procedure DoShow;
 ```
+### v 0.23
+Bug fix on disabling logs
