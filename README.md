@@ -232,3 +232,8 @@ procedure DoShow;
 ```
 ### v 0.23
 Bug fix on disabling logs
+### v 0.24
+Add new function
+```
+procedure EnableLog(checked:Boolean);
+```
