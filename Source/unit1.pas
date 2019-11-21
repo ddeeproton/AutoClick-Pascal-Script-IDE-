@@ -130,6 +130,7 @@ type
     procedure SynEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure TimerRecordTimer(Sender: TObject);
     procedure AddLog(s: String);
+
   private
 
   public
@@ -171,6 +172,7 @@ var
   RunNextScript: string;
   CanEraseProcessScripts: Integer;
   CanRun: Boolean;
+  isLogEnabled: Boolean;
 
 implementation
 
@@ -180,15 +182,18 @@ implementation
 
 procedure TForm1.AddLog(s: String);
 begin
-  if MenuItemDisableLog.Checked then Exit;
-  Memo2.Lines.Add(s);
+  if isLogEnabled then Memo2.Lines.Add(s);
 end;
 
+procedure EnableLog(checked:Boolean);
+begin
+  isLogEnabled := checked;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var i: Integer;
 begin
-
+  isLogEnabled := True;
 
 
   SynEdit1.Clear;
@@ -382,6 +387,7 @@ end;
 procedure TForm1.MenuItemDisableLogClick(Sender: TObject);
 begin
   MenuItemDisableLog.Checked := not MenuItemDisableLog.Checked;
+  isLogEnabled := not MenuItemDisableLog.Checked;
 end;
 
 
@@ -1105,6 +1111,7 @@ begin
   Sender.AddFunction(@Replace, 'function Replace(content, old, new: String):String;');
   Sender.AddFunction(@DoHide1, 'procedure DoHide');
   Sender.AddFunction(@DoShow1, 'procedure DoShow');
+  Sender.AddFunction(@EnableLog, 'procedure EnableLog(checked:Boolean);');
 
 
 
@@ -1317,7 +1324,7 @@ end;
 
 procedure TForm1.MenuItemAboutClick(Sender: TObject);
 begin
-  ShowMessage('Version: 0.23'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
+  ShowMessage('Version: 0.24'+#13#10+'Source: https://github.com/ddeeproton/AutoClick-Pascal-Script-IDE-');
 end;
 
 
