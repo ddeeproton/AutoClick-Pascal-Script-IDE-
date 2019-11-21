@@ -1287,7 +1287,9 @@ begin
   if index = 35 then LabeledEdit1.Text := 'HTTPClientGet(''http://www.awebsite.com'');';
   if index = 36 then LabeledEdit1.Text := 'WGet(''http://www.awebsite.com'',''data\webContent.pss'', 5000);';
   if index = 37 then LabeledEdit1.Text := 'Replace(''content'', ''old'', ''new'');';
-
+  if index = 38 then LabeledEdit1.Text := 'DoHide;';
+  if index = 39 then LabeledEdit1.Text := 'DoShow;';
+  if index = 40 then LabeledEdit1.Text := 'EnableLog(True);';
 
 
   if Sender <> nil then TTimer(Sender).Enabled:=True;

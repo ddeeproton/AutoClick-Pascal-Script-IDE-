@@ -664,6 +664,9 @@ object Form1: TForm1
             'function HTTPClientGet(url: String):String;'
             'function WGet(url, destination: String; timeout: Integer):String;'
             'function Replace(content, old, new: String):String;'
+            'procedure DoHide;'
+            'procedure DoShow;'
+            'procedure EnableLog(checked:Boolean);'
           )
           OnSelect = ComboBoxCodeSelect
           Style = csDropDownList
